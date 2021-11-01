@@ -12,18 +12,18 @@ package Objects;
 public class Device {
     
     private int ID;
-    private int Customer_Id;
     private String Model;
     private String Manufacturer;
     private String Priority;
+    private int Customer_Id;
     
     //<editor-fold defaultstate="collapsed" desc="Constructors">
-    public Device(int ID, int Customer_Id, String Model, String Manufacturer, String Priority) {
+    public Device(int ID, String Model, String Manufacturer, String Priority, int Customer_Id) {
         this.ID = ID;
-        this.Customer_Id = Customer_Id;
         this.Model = Model;
         this.Manufacturer = Manufacturer;
         this.Priority = Priority;
+        this.Customer_Id = Customer_Id;
 
     }
 //</editor-fold>
@@ -73,7 +73,7 @@ public class Device {
     //<editor-fold defaultstate="collapsed" desc="Prints all data">
     @Override
     public String toString() {
-        return ID + "," + Customer_Id + "," + Model + "," + Manufacturer + "," + Priority;
+        return ID+ "," + Model + "," + Manufacturer + "," + Priority + "," + Customer_Id ;
     }
 
     //</editor-fold>

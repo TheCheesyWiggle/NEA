@@ -240,7 +240,6 @@ public class respository {
         public static ArrayList<Customer> findAllCustomers(){
             ArrayList<Customer> CustomerList = new ArrayList<>();
                 try {
-
                     String sql = "SELECT * FROM Customer";
                     //connects to the databse 
                     ResultSet rs = executeSQL.executeQuery(getConnection(), sql);
@@ -314,22 +313,107 @@ public class respository {
         } 
         //</editor-fold> // Works
         
-        // <editor-fold defaultstate="collapsed" desc="Find Customer with Device model">
-        //</editor-fold> // Doesn't Work
+        // <editor-fold defaultstate="collapsed" desc="Find Customer with Device ID">
+        public static ArrayList<Customer> findCustomersDevcieID(int DeviceID ){
+            ArrayList<Customer> CustomerList = new ArrayList<>();
+                try {
+
+                    String sql = "SELECT Customer.* \n"
+                    + "FROM Device INNER JOIN Customer ON Customer.CustomerID = Device.CustomerID \n"
+                    + "WHERE ((Device.DeviceID)='" + DeviceID + "')";
+                    //connects to the databse 
+                    ResultSet rs = executeSQL.executeQuery(getConnection(), sql);
+                    //while there are more records in the database = true
+                    while (rs.next()) {
+                        //tures data from database into a object
+                        Customer nextCustomer = new Customer(rs.getInt("CustomerID"),rs.getString("FirstName"),rs.getString("LastName"),rs.getString("Email"),rs.getString("PhoneNumber"),rs.getString("Address"),rs.getString("Postcode"));
+                        //adds new object to the array list
+                        CustomerList.add(nextCustomer);
+                    }
+
+                    con.close();
+                } catch (Exception e) {
+                    System.out.println("Error in the repository class: " + e);
+
+                }
+                return CustomerList;
+        } 
+        //</editor-fold> // Works
         
-        // <editor-fold defaultstate="collapsed" desc="Find Customer with ??">
-        //</editor-fold> // Doesn't Work
     // </editor-fold>
         
         
         public static void findTechnicain(){
         
         }
+        // <editor-fold defaultstate="collapsed" desc="Device functions">   
+        
+        // <editor-fold defaultstate="collapsed" desc="Find All Devices">   
+        public static ArrayList<Device> findAllDevices(){
+            ArrayList<Device> DeviceList = new ArrayList<>();
+            try {
+                    String sql = "SELECT * FROM Device";
+                    //connects to the databse 
+                    ResultSet rs = executeSQL.executeQuery(getConnection(), sql);
+                    //while there are more records in the database = true
+                    while (rs.next()) {
+                        //tures data from database into a object
+                        Device nextDevice = new Device(rs.getInt("DeviceID"),rs.getString("Manufacturer"),rs.getString("Model"),rs.getString("Priority"),rs.getInt("CustomerID"));
+                        //adds new object to the array list
+                        DeviceList.add(nextDevice);
+                    }
 
-        public static void findDevice(){
+                    con.close();
+                } catch (Exception e) {
+                    System.out.println("Error in the repository class: " + e);
 
+                }
+                return DeviceList;
         }
+        // </editor-fold> //Works
+        
+        // <editor-fold defaultstate="collapsed" desc="Find Device with DeviceID">  
+        public static ArrayList<Device> findDevicesID(int DeviceID){
+            ArrayList<Device> DeviceList = new ArrayList<>();
+            try {
+                    String sql = "SELECT * FROM Device /n"
+                            + "WHERE ((Device.DeviceID)='" + DeviceID + "')";;
+                    //connects to the databse 
+                    ResultSet rs = executeSQL.executeQuery(getConnection(), sql);
+                    //while there are more records in the database = true
+                    while (rs.next()) {
+                        //tures data from database into a object
+                        Device nextDevice = new Device(rs.getInt("DeviceID"),rs.getString("Manufacturer"),rs.getString("Model"),rs.getString("Priority"),rs.getInt("CustomerID"));
+                        //adds new object to the array list
+                        DeviceList.add(nextDevice);
+                    }
 
+                    con.close();
+                } catch (Exception e) {
+                    System.out.println("Error in the repository class: " + e);
+
+                }
+                return DeviceList;
+        }        
+        // </editor-fold> //Needs Testing
+        
+        // <editor-fold defaultstate="collapsed" desc="Find Device with ??">  
+        
+        // </editor-fold> //Doesn't work
+        
+        // <editor-fold defaultstate="collapsed" desc="Find Device with ??">  
+        
+        // </editor-fold> //Doesn't work
+        
+        // <editor-fold defaultstate="collapsed" desc="Find Device with ??">  
+        
+        // </editor-fold> //Doesn't work
+        
+        // <editor-fold defaultstate="collapsed" desc="Find Device with ??">  
+        
+        // </editor-fold> //Doesn't work
+    // </editor-fold>
+        
         public static void findTicket(){
 
         }
@@ -339,7 +423,7 @@ public class respository {
         }
         // </editor-fold>
     
-    // <editor-fold defaultstate="collapsed" desc="Update functions">  
+    // <editor-fold defaultstate="collapsed" desc="Edit functions">  
     public static void editCustomer(){
         
     }
@@ -358,6 +442,8 @@ public class respository {
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="Add functions">  
+    
+    // <editor-fold defaultstate="collapsed" desc="Add Customer">   
     public static void AddCustomer(Customer newCustomer){
         try {
             String sql = "SELECT Customer.* FROM Customer";
@@ -380,6 +466,9 @@ public class respository {
             System.out.println("Error in the repository class: " + e);
         }
     }
+    // </editor-fold> //Works
+    
+    // <editor-fold defaultstate="collapsed" desc="Add Device">   
     public static void AddDevice(Device newDevice){
         try {
             String sql = "SELECT Device.* FROM Device";
@@ -400,7 +489,9 @@ public class respository {
             System.out.println("Error in the repository class: " + e);
         }
     }
-
+    // </editor-fold> //Works
+    
+    // <editor-fold defaultstate="collapsed" desc="Add Ticket">   
     public static void AddTicket(Ticket newTicket){
                 try {
             String sql = "SELECT Ticket.* FROM Ticket";
@@ -421,7 +512,9 @@ public class respository {
             System.out.println("Error in the repository class: " + e);
         }
     }
+    // </editor-fold> //Works
     
+    // <editor-fold defaultstate="collapsed" desc="Add Notes">   
     public static void AddNotes(Note newNote){
         try {
             String sql = "SELECT Note.* FROM Note";
@@ -441,7 +534,10 @@ public class respository {
             System.out.println("Error in the repository class: " + e);
         }
     }
+    // </editor-fold> //Should Work
+    
     //Admin function
+    // <editor-fold defaultstate="collapsed" desc="Add Technicain">   
     public static void AddTechnician(Technician newTechnician){
         try {
             String sql = "SELECT Technician.* FROM Technician";
@@ -463,6 +559,8 @@ public class respository {
             System.out.println("Error in the repository class: " + e);
         }
     }
+    // </editor-fold> //Should work
+    
     // </editor-fold>
     
     public static boolean emailValdation(String email){
@@ -475,14 +573,15 @@ public class respository {
     /*
     Tick List
     ----------------------------------------------------------------------------
-    find customer
+    find customer     (Should be done maybe have a check over)
         - all       x
-        - name       
-        - device ID   
+        - name      x 
+        - device ID x  
         - ticket    x
 
     find device
         - all
+        - device ID     
         - manufacturer
         - customer
         - model

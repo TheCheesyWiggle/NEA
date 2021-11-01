@@ -190,7 +190,7 @@ public class AddDevice extends javax.swing.JFrame {
         String Manufacturer = ManufacturerField.getText();
         String Priority = PriorityField.getText();
         //take all the values and creates an object
-        Device newDevice = new Device(0,CustomerID,Model,Manufacturer,Priority);
+        Device newDevice = new Device(0,Model,Manufacturer,Priority,CustomerID);
         respository.AddDevice(newDevice);
     }//GEN-LAST:event_SaveBtnActionPerformed
 

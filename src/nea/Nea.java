@@ -27,26 +27,20 @@ public class Nea {
         
         //creates arraylists for testing
         ArrayList<Customer> Customers = new ArrayList<Customer>();   
-
         ArrayList<Ticket> ticket = new ArrayList<Ticket>();
-        
+        ArrayList<Device> device = new ArrayList<Device>();
         
         
         //ticket = LibraryFunctions.respository.findTicketsOpenDate("10/07/2021");
-        
-        
-        
-        Customers = LibraryFunctions.respository.findCustomersFirstName("Finn") ;
-        
+        //Customers = LibraryFunctions.respository.findCustomersDevcieID(1) ;
+        device = LibraryFunctions.respository.findAllDevices();
         
         //for (int i = 0; i < ticket.size(); i++) {
-        //    System.out.print(ticket.get(i).getID() + "|");
         //    System.out.println(ticket.get(i).toString());
         //}
         
-        for(int i =0; i<Customers.size();i++){
-            System.out.print(Customers.get(i).getID()+"|");
-            System.out.println(Customers.get(i).toString());
+        for(int i =0; i<device.size();i++){
+            System.out.println(device.get(i).toString());
         }
         
         //get all attributes in a arraylist
