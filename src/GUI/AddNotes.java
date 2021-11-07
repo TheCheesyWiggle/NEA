@@ -5,6 +5,10 @@
  */
 package GUI;
 
+
+import Objects.Note;
+import Objects.Technician;
+import LibraryFunctions.respository;
 /**
  *
  * @author fv200399
@@ -27,21 +31,149 @@ public class AddNotes extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        TechnicianNameLabel = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ContentField = new javax.swing.JTextArea();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        MainMenuBtn = new javax.swing.JButton();
+        SaveBtn = new javax.swing.JButton();
+        RefreshBtn = new javax.swing.JButton();
+        TicketIDField = new javax.swing.JTextField();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel1.setText("Add notes");
+
+        TechnicianNameLabel.setText("Technician Name");
+
+        jLabel2.setText("Technician:");
+
+        jLabel3.setText("Content :");
+
+        ContentField.setColumns(20);
+        ContentField.setRows(5);
+        jScrollPane1.setViewportView(ContentField);
+
+        jLabel4.setText("Ticket ID:");
+
+        MainMenuBtn.setText("Return to Main Menu");
+        MainMenuBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MainMenuBtnActionPerformed(evt);
+            }
+        });
+
+        SaveBtn.setText("Save");
+        SaveBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaveBtnActionPerformed(evt);
+            }
+        });
+
+        RefreshBtn.setText("Refresh");
+        RefreshBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RefreshBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(145, 145, 145)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(SaveBtn)
+                                .addGap(26, 26, 26)
+                                .addComponent(RefreshBtn)
+                                .addGap(18, 18, 18)
+                                .addComponent(MainMenuBtn))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel2)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel4)
+                                        .addComponent(jLabel3)
+                                        .addComponent(jLabel5)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(TechnicianNameLabel)
+                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(25, 25, 25)
+                                        .addComponent(TicketIDField, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TechnicianNameLabel)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(TicketIDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel5)
+                .addGap(53, 53, 53)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(SaveBtn)
+                    .addComponent(RefreshBtn)
+                    .addComponent(MainMenuBtn))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void MainMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MainMenuBtnActionPerformed
+        MainMenu main = new MainMenu();
+        main.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_MainMenuBtnActionPerformed
+
+    private void SaveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveBtnActionPerformed
+        //Grabs all the values inputted by the User
+        String Content = ContentField.getText();
+        int TicketID = Integer.parseInt(TicketIDField.getText());
+
+        //creates it into an object (For noteID 0 is a place holder as the database automatically fills it in)
+        Note newNote = new Note(0,Content,TicketID,1/* get the current technicains id automatically*/);
+        LibraryFunctions.respository.AddNotes(newNote);
+
+        //refreshes the page
+        AddNotes addnotes = new AddNotes();
+        addnotes.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_SaveBtnActionPerformed
+
+    private void RefreshBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshBtnActionPerformed
+        AddNotes addnotes = new AddNotes();
+        addnotes.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_RefreshBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +211,17 @@ public class AddNotes extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea ContentField;
+    private javax.swing.JButton MainMenuBtn;
+    private javax.swing.JButton RefreshBtn;
+    private javax.swing.JButton SaveBtn;
+    private javax.swing.JLabel TechnicianNameLabel;
+    private javax.swing.JTextField TicketIDField;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

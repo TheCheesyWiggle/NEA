@@ -120,6 +120,11 @@ public class MainMenu extends javax.swing.JFrame {
         AddDeviceBtn.setText("Add Device");
 
         AddNoteBtn.setText("Add Notes");
+        AddNoteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddNoteBtnActionPerformed(evt);
+            }
+        });
 
         FindDeviceBtn.setText("Find Device");
 
@@ -267,6 +272,12 @@ public class MainMenu extends javax.swing.JFrame {
         this.dispose();
         */
     }//GEN-LAST:event_findCustomerBtnActionPerformed
+
+    private void AddNoteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddNoteBtnActionPerformed
+        AddNotes addnotes = new AddNotes();
+        addnotes.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_AddNoteBtnActionPerformed
 
     /**
      * @param args the command line arguments
