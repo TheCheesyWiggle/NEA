@@ -29,18 +29,19 @@ public class Nea {
         ArrayList<Customer> Customers = new ArrayList<Customer>();   
         ArrayList<Ticket> ticket = new ArrayList<Ticket>();
         ArrayList<Device> device = new ArrayList<Device>();
-        ArrayList<Note> note = new ArrayList<>();
+        ArrayList<Note> note = new ArrayList<Note>();
+        ArrayList<Technician> tech = new ArrayList<Technician>();
         
         //ticket = LibraryFunctions.respository.findTicketsOpenDate("10/07/2021");
         //Customers = LibraryFunctions.respository.findCustomersDevcieID(1) ;
-        note = LibraryFunctions.respository.findNotesID(1);
+        tech = LibraryFunctions.respository.findTechnicianTicketID(2);
         
         //for (int i = 0; i < ticket.size(); i++) {
         //    System.out.println(ticket.get(i).toString());
         //}
         
-        for(int i =0; i<note.size();i++){
-            System.out.println(note.get(i).toString());
+        for(int i =0; i<tech.size();i++){
+            System.out.println(tech.get(i).toString());
         }
         
         //get all attributes in a arraylist

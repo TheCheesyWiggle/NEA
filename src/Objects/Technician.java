@@ -82,7 +82,7 @@ public class Technician {
     //<editor-fold defaultstate="collapsed" desc="Prints all data">
     @Override
     public String toString() {
-        return "Technician{" + "Id=" + Id + ", Name=" + Name + ", Username=" + Username + ", Password=" + Password + ", Company_Email=" + Company_Email + ", Admin=" + Admin + '}';
+        return Id + "," + Name + "," + Username + "," + Password + "," + Company_Email + "," + Admin;
     }
     //</editor-fold>
    

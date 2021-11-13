@@ -546,14 +546,15 @@ public class respository {
                 }
                 return NoteList;
         }
-        // </editor-fold>//works
+        // </editor-fold>//Works
         
-        // <editor-fold defaultstate="collapsed" desc="Find Device with DeviceID">  
+        // <editor-fold defaultstate="collapsed" desc="Find Note with NoteID">  
         public static ArrayList<Note> findNotesID(int NoteID){
             ArrayList<Note> NoteList = new ArrayList<>();
             try {
-                    String sql = "SELECT * FROM Note \n"
-                            + "WHERE ((Note.NoteID)='" + NoteID + "')";;
+                    String sql = "SELECT Note.* \n"
+                            + "FROM Note \n"
+                            + "WHERE ((Note.NoteID)='" + NoteID + "')";
                     //connects to the databse 
                     ResultSet rs = executeSQL.executeQuery(getConnection(), sql);
                     //while there are more records in the database = true
@@ -571,16 +572,172 @@ public class respository {
                 }
                 return NoteList;
         }        
-        // </editor-fold> //doesnt work
-    // </editor-fold>
+        // </editor-fold> //Works
         
-  
-        public static void findTechnicain(){
-        
-        }
+        // <editor-fold defaultstate="collapsed" desc="Find Note with DeviceID">  
+        public static ArrayList<Note> findNotesDeviceID(int DeviceID){
+            ArrayList<Note> NoteList = new ArrayList<>();
+            try {
+                    String sql = "SELECT Note.* \n"
+                            + "FROM Note INNER JOIN Ticket ON Ticket.TicketID = Note.TicketID INNER JOIN Device ON Device.DeviceID = Ticket.DeviceID\n"
+                            + "WHERE ((Note.TicketID)= Ticket.TicketID AND Ticket.DeviceID = '" + DeviceID + "')";
+                    //connects to the databse 
+                    ResultSet rs = executeSQL.executeQuery(getConnection(), sql);
+                    //while there are more records in the database = true
+                    while (rs.next()) {
+                        //tures data from database into a object
+                        Note nextNote = new Note(rs.getInt("NoteID"),rs.getString("Content"),rs.getInt("TicketID"),rs.getInt("TechnicianID"));
+                        //adds new object to the array list
+                        NoteList.add(nextNote);
+                    }
 
+                    con.close();
+                } catch (Exception e) {
+                    System.out.println("Error in the repository class: " + e);
+
+                }
+                return NoteList;
+        }        
+        // </editor-fold> //Works
+        
+        // <editor-fold defaultstate="collapsed" desc="Find Note with TicketID">  
+        public static ArrayList<Note> findNotesTicketID(int TicketID){
+            ArrayList<Note> NoteList = new ArrayList<>();
+            try {
+                String sql = "SELECT Note.* \n"
+                       + " FROM Ticket INNER JOIN Note ON Ticket.TicketID = Note.TicketID\n"
+                            + "WHERE ((Note.TicketID)='" + TicketID + "')";;
+                
+                    //connects to the databse 
+                    ResultSet rs = executeSQL.executeQuery(getConnection(), sql);
+                    //while there are more records in the database = true
+                    while (rs.next()) {
+                        //tures data from database into a object
+                        Note nextNote = new Note(rs.getInt("NoteID"),rs.getString("Content"),rs.getInt("TicketID"),rs.getInt("TechnicianID"));
+                        //adds new object to the array list
+                        NoteList.add(nextNote);
+                    }
+
+                    con.close();
+                } catch (Exception e) {
+                    System.out.println("Error in the repository class: " + e);
+
+                }
+                return NoteList;
+        }        
+        // </editor-fold> //Works
+    // </editor-fold>
+        
+    // <editor-fold defaultstate="collapsed" desc="Technician functions">   
+        
+        // <editor-fold defaultstate="collapsed" desc="Find all Technicians">   
+        public static ArrayList<Technician> findAllTechnician(){
+            ArrayList<Technician> TechnicianList = new ArrayList<>();
+            try {
+                    String sql = "SELECT * FROM Note";
+                    //connects to the databse 
+                    ResultSet rs = executeSQL.executeQuery(getConnection(), sql);
+                    //while there are more records in the database = true
+                    while (rs.next()) {
+                        //tures data from database into a object
+                        Technician nextTech = new Technician(rs.getInt("TechnicianID"),rs.getString("Fullname"),rs.getString("Username"),rs.getString("Password"),rs.getString("Email"),rs.getBoolean("Admin"));
+                        //adds new object to the array list
+                        TechnicianList.add(nextTech);
+                    }
+
+                    con.close();
+                } catch (Exception e) {
+                    System.out.println("Error in the repository class: " + e);
+
+                }
+                return TechnicianList;
+        }
+        // </editor-fold> //works
+        
+        // <editor-fold defaultstate="collapsed" desc="Find Technician with TechnicianID">  
+        public static ArrayList<Technician> findTechnicianID(int TechnicianID){
+            ArrayList<Technician> TechnicianList = new ArrayList<>();
+            try {
+                    String sql = "SELECT Technician.* \n"
+                            + "FROM Technician \n"
+                            + "WHERE ((Technician.TechnicianID)='" + TechnicianID + "')";
+                    //connects to the databse 
+                    ResultSet rs = executeSQL.executeQuery(getConnection(), sql);
+                    //while there are more records in the database = true
+                    while (rs.next()) {
+                        //tures data from database into a object
+                        Technician nextTech = new Technician(rs.getInt("TechnicianID"),rs.getString("Fullname"),rs.getString("Username"),rs.getString("Password"),rs.getString("Email"),rs.getBoolean("Admin"));
+                        //adds new object to the array list
+                        TechnicianList.add(nextTech);
+                    }
+
+                    con.close();
+                } catch (Exception e) {
+                    System.out.println("Error in the repository class: " + e);
+
+                }
+                return TechnicianList;
+        }
+        // </editor-fold> //works
+        
+        // <editor-fold defaultstate="collapsed" desc="Find Technician with Technician name">  
+        public static ArrayList<Technician> findTechnicianName(String TechnicianName){
+            ArrayList<Technician> TechnicianList = new ArrayList<>();
+            try {
+                    String sql = "SELECT Technician.* \n"
+                            + "FROM Technician \n"
+                            + "WHERE ((Technician.Fullname)='" + TechnicianName + "')";
+                    //connects to the databse 
+                    ResultSet rs = executeSQL.executeQuery(getConnection(), sql);
+                    //while there are more records in the database = true
+                    while (rs.next()) {
+                        //tures data from database into a object
+                        Technician nextTech = new Technician(rs.getInt("TechnicianID"),rs.getString("Fullname"),rs.getString("Username"),rs.getString("Password"),rs.getString("Email"),rs.getBoolean("Admin"));
+                        //adds new object to the array list
+                        TechnicianList.add(nextTech);
+                    }
+
+                    con.close();
+                } catch (Exception e) {
+                    System.out.println("Error in the repository class: " + e);
+
+                }
+                return TechnicianList;
+        }
+        // </editor-fold> //works
+        
+        // <editor-fold defaultstate="collapsed" desc="Find All technicians who have worked on a single ticket">  
+        public static ArrayList<Technician> findTechnicianTicketID(int TicketID){
+            ArrayList<Technician> TechnicianList = new ArrayList<>();
+            try {
+                    String sql = "SELECT Technician.* \n"
+                            + "FROM Technician INNER JOIN Note ON Technician.TechnicianID = Note.TechnicianID INNER JOIN Ticket ON Note.TicketID = Ticket.TicketID\n"
+                            + "WHERE ((Technician.TechnicianID)= Note.TechnicianID AND Note.TicketID = '" + TicketID + "')";
+                    //connects to the databse 
+                    ResultSet rs = executeSQL.executeQuery(getConnection(), sql);
+                    //while there are more records in the database = true
+                    while (rs.next()) {
+                        //tures data from database into a object
+                        Technician nextTech = new Technician(rs.getInt("TechnicianID"),rs.getString("Fullname"),rs.getString("Username"),rs.getString("Password"),rs.getString("Email"),rs.getBoolean("Admin"));
+                        //adds new object to the array list
+                        TechnicianList.add(nextTech);
+                    }
+
+                    con.close();
+                } catch (Exception e) {
+                    System.out.println("Error in the repository class: " + e);
+
+                }
+                return TechnicianList;
+        }
+        // </editor-fold> //works
         
     // </editor-fold>
+        
+    
+    
+
+// </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="Edit functions">  
     public static void editCustomer(){
@@ -756,10 +913,16 @@ public class respository {
         - device ID               x
 
     find notes
-        - all
-        - noteID
-        - device ID
-        - ticket ID
+        - all                     x
+        - noteID                  x
+        - device ID               x
+        - ticket ID               x
+    
+    find Technicain  
+        - all                     x     
+        - TechnicainID            x
+        - tech name               x
+        - ticket ID               x
     
     add technican
     add device     X
