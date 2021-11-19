@@ -118,6 +118,11 @@ public class MainMenu extends javax.swing.JFrame {
         });
 
         AddDeviceBtn.setText("Add Device");
+        AddDeviceBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddDeviceBtnActionPerformed(evt);
+            }
+        });
 
         AddNoteBtn.setText("Add Notes");
         AddNoteBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -127,6 +132,11 @@ public class MainMenu extends javax.swing.JFrame {
         });
 
         FindDeviceBtn.setText("Find Device");
+        FindDeviceBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FindDeviceBtnActionPerformed(evt);
+            }
+        });
 
         FindNotesBtn.setText("Find Notes");
 
@@ -232,25 +242,21 @@ public class MainMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void openTicketBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openTicketBtnActionPerformed
-        /*
         OpenTicket open = new OpenTicket();
         open.setVisible(true);
         this.dispose();
-        */
     }//GEN-LAST:event_openTicketBtnActionPerformed
 
     private void findTicketBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findTicketBtnActionPerformed
-        /*
         FindTicket findTicket = new FindTicket();
         findTicket.setVisible(true);
-        this.dispose()*/
+        this.dispose();
     }//GEN-LAST:event_findTicketBtnActionPerformed
 
     private void addTechnicianBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTechnicianBtnActionPerformed
-        /*
         AddTechnician addTech = new AddTechnician();
         addTech.setVisible(true);
-        this.dispose()*/
+        this.dispose();
     }//GEN-LAST:event_addTechnicianBtnActionPerformed
 
     private void addCustomerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCustomerBtnActionPerformed
@@ -266,11 +272,9 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_LogOffBtnActionPerformed
 
     private void findCustomerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findCustomerBtnActionPerformed
-        /*
         FindCustomer FindCust = new FindCustomer();
         FindCust.setVisible(true);
         this.dispose();
-        */
     }//GEN-LAST:event_findCustomerBtnActionPerformed
 
     private void AddNoteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddNoteBtnActionPerformed
@@ -278,6 +282,18 @@ public class MainMenu extends javax.swing.JFrame {
         addnotes.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_AddNoteBtnActionPerformed
+
+    private void FindDeviceBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FindDeviceBtnActionPerformed
+        FindDevice FindDev = new FindDevice();
+        FindDev.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_FindDeviceBtnActionPerformed
+
+    private void AddDeviceBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddDeviceBtnActionPerformed
+        AddDevice addDev = new AddDevice();
+        addDev.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_AddDeviceBtnActionPerformed
 
     /**
      * @param args the command line arguments

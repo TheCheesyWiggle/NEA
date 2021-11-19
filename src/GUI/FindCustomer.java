@@ -5,6 +5,10 @@
  */
 package GUI;
 
+import Objects.Customer;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+
 /**
  *
  * @author fv200399
@@ -27,7 +31,7 @@ public class FindCustomer extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        SearchCondtion = new javax.swing.JComboBox<>();
+        SearchCondition = new javax.swing.JComboBox<>();
         SearchBar = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         TechnicianNameField = new javax.swing.JLabel();
@@ -40,10 +44,10 @@ public class FindCustomer extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        SearchCondtion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        SearchCondtion.addActionListener(new java.awt.event.ActionListener() {
+        SearchCondition.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID", "Name", "DeviceID", "TicketID" }));
+        SearchCondition.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SearchCondtionActionPerformed(evt);
+                SearchConditionActionPerformed(evt);
             }
         });
 
@@ -51,11 +55,6 @@ public class FindCustomer extends javax.swing.JFrame {
 
         TechnicianNameField.setText("Technician Name");
 
-        ResultsList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         Results.setViewportView(ResultsList);
 
         MainMenuBtn.setText("Return to Main Menu");
@@ -98,19 +97,20 @@ public class FindCustomer extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(54, 54, 54)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Results, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(SearchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(SearchCondtion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel2))))
-                        .addGap(0, 77, Short.MAX_VALUE))
+                                    .addComponent(jLabel2)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(SearchBar)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(SearchCondition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(Results, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(0, 22, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(EditCustomerBtn)
-                        .addGap(32, 32, 32)
-                        .addComponent(SearchBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(SearchBtn)
+                        .addGap(118, 118, 118)
                         .addComponent(MainMenuBtn)))
                 .addContainerGap())
         );
@@ -126,7 +126,7 @@ public class FindCustomer extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SearchBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SearchCondtion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(SearchCondition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Results, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
@@ -140,9 +140,9 @@ public class FindCustomer extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void SearchCondtionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchCondtionActionPerformed
+    private void SearchConditionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchConditionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_SearchCondtionActionPerformed
+    }//GEN-LAST:event_SearchConditionActionPerformed
 
     private void MainMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MainMenuBtnActionPerformed
         MainMenu main = new MainMenu();
@@ -155,7 +155,61 @@ public class FindCustomer extends javax.swing.JFrame {
     }//GEN-LAST:event_EditCustomerBtnActionPerformed
 
     private void SearchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchBtnActionPerformed
-        LibraryFunctions.respository.findCustomerTickets(1) ;
+        //based on search properties search for the dufferent customers
+        ArrayList<Customer> Customers = new ArrayList<Customer>(); 
+        //creates a list model to edit later
+        DefaultListModel listModel = new DefaultListModel();
+        //switch statement to check the serch condition
+        switch(SearchCondition.getSelectedIndex()){
+            case 0:
+                //Retrieves customerID from the search bar
+                int CustomerID = Integer.parseInt(SearchBar.getText());
+                //Fills the arraylist wih relevant customer objects
+                Customers = Customers = LibraryFunctions.respository.findCustomersID(CustomerID); 
+                //loops through the customers arraylist and adds the objects to the list models
+                for(Customer customer : Customers){
+                    listModel.addElement(customer);
+                }
+                //sets the list model
+                ResultsList.setModel(listModel);
+                break;
+            case 1:
+                //Retrieves customers name from the search bar
+                String CustomerName = SearchBar.getText();
+                //Fills the arraylist wih relevant customer objects
+                Customers = LibraryFunctions.respository.findCustomersFirstName(CustomerName); 
+                //loops through the customers arraylist and adds the objects to the list models
+                for(Customer customer : Customers){
+                    listModel.addElement(customer);
+                }
+                //sets the list model
+                ResultsList.setModel(listModel);
+                break;
+            case 2:
+                //Retrieves DeviceID from the search bar
+                int DeviceID = Integer.parseInt(SearchBar.getText());
+                //Fills the arraylist wih relevant customer objects
+                Customers = LibraryFunctions.respository.findCustomersDevcieID(DeviceID); 
+                //loops through the customers arraylist and adds the objects to the list models
+                for(Customer customer : Customers){
+                    listModel.addElement(customer);
+                }
+                //sets the list model
+                ResultsList.setModel(listModel);
+                break;
+            case 3:
+                //Retrieves TicketID from the search bar
+                int TicketID = Integer.parseInt(SearchBar.getText());
+                //Fills the arraylist wih relevant customer objects
+                for(Customer customer : Customers){
+                    listModel.addElement(customer);
+                }
+                //sets the list model
+                ResultsList.setModel(listModel);
+                break;
+        }
+        
+        //comment code
     }//GEN-LAST:event_SearchBtnActionPerformed
 
     /**
@@ -201,7 +255,7 @@ public class FindCustomer extends javax.swing.JFrame {
     private javax.swing.JList<String> ResultsList;
     private javax.swing.JTextField SearchBar;
     private javax.swing.JButton SearchBtn;
-    private javax.swing.JComboBox<String> SearchCondtion;
+    private javax.swing.JComboBox<String> SearchCondition;
     private javax.swing.JLabel TechnicianNameField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

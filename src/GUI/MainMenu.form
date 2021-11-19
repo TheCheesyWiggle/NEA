@@ -275,6 +275,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Add Device"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AddDeviceBtnActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="AddNoteBtn">
       <Properties>
@@ -288,6 +291,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Find Device"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="FindDeviceBtnActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="FindNotesBtn">
       <Properties>

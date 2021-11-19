@@ -33,15 +33,15 @@ public class Nea {
         ArrayList<Technician> tech = new ArrayList<Technician>();
         
         //ticket = LibraryFunctions.respository.findTicketsOpenDate("10/07/2021");
-        //Customers = LibraryFunctions.respository.findCustomersDevcieID(1) ;
-        tech = LibraryFunctions.respository.findTechnicianTicketID(2);
+        device = LibraryFunctions.respository.findDevicesTicketID(2);
+        //tech = LibraryFunctions.respository.findTechnicianTicketID(2);
         
         //for (int i = 0; i < ticket.size(); i++) {
         //    System.out.println(ticket.get(i).toString());
         //}
         
-        for(int i =0; i<tech.size();i++){
-            System.out.println(tech.get(i).toString());
+        for(int i =0; i<device.size();i++){
+            System.out.println(device.get(i).toString());
         }
         
         //get all attributes in a arraylist

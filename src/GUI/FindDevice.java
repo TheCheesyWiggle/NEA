@@ -5,6 +5,10 @@
  */
 package GUI;
 
+import Objects.Device;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+
 /**
  *
  * @author fv200399
@@ -27,7 +31,7 @@ public class FindDevice extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        SearchCondtion = new javax.swing.JComboBox<>();
+        SearchCondition = new javax.swing.JComboBox<>();
         SearchBar = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         TechnicianNameField1 = new javax.swing.JLabel();
@@ -36,13 +40,14 @@ public class FindDevice extends javax.swing.JFrame {
         MainMenuBtn = new javax.swing.JToggleButton();
         EditDeviceBtn = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        SearchBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        SearchCondtion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        SearchCondtion.addActionListener(new java.awt.event.ActionListener() {
+        SearchCondition.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "DeviceID", "Manufacturer", "CustomerID", "Model", "TicketID" }));
+        SearchCondition.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SearchCondtionActionPerformed(evt);
+                SearchConditionActionPerformed(evt);
             }
         });
 
@@ -50,11 +55,6 @@ public class FindDevice extends javax.swing.JFrame {
 
         TechnicianNameField1.setText("Technician Name");
 
-        ResultsList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         Results.setViewportView(ResultsList);
 
         MainMenuBtn.setText("Return to Main Menu");
@@ -68,6 +68,13 @@ public class FindDevice extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Search For Device");
+
+        SearchBtn.setText("Search");
+        SearchBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -85,16 +92,20 @@ public class FindDevice extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(44, 44, 44)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Results, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(Results, javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(SearchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel2)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(SearchBar)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(SearchCondtion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel2))))
-                        .addGap(0, 77, Short.MAX_VALUE))
+                                        .addComponent(SearchCondition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(22, 22, 22))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(EditDeviceBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(119, 119, 119)
+                        .addComponent(SearchBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
                         .addComponent(MainMenuBtn)))
                 .addContainerGap())
         );
@@ -110,28 +121,99 @@ public class FindDevice extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SearchBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SearchCondtion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(SearchCondition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Results, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(MainMenuBtn)
-                    .addComponent(EditDeviceBtn))
+                    .addComponent(EditDeviceBtn)
+                    .addComponent(SearchBtn))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void SearchCondtionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchCondtionActionPerformed
+    private void SearchConditionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchConditionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_SearchCondtionActionPerformed
+    }//GEN-LAST:event_SearchConditionActionPerformed
 
     private void MainMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MainMenuBtnActionPerformed
         MainMenu main = new MainMenu();
         main.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_MainMenuBtnActionPerformed
+
+    private void SearchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchBtnActionPerformed
+        //based on search properties search for the different devices
+        ArrayList<Device> Devices = new ArrayList<Device>(); 
+        //creates a list model to edit later
+        DefaultListModel listModel = new DefaultListModel();
+        //switch statement to check the search condition
+        switch (SearchCondition.getSelectedIndex()) {
+            case 0:
+                //Retrieves customerID from the search bar
+                int DeviceID = Integer.parseInt(SearchBar.getText());
+                //Fills the arraylist wih relevant customer objects
+                Devices = LibraryFunctions.respository.findDevicesID(DeviceID);
+                //loops through the customers arraylist and adds the objects to the list models
+                for (Device Device : Devices) {
+                    listModel.addElement(Device);
+                }
+                //sets the list model
+                ResultsList.setModel(listModel);
+                break;
+            case 1:
+                //Retrieves device manufacturer from the search bar
+                String manufacturer = SearchBar.getText();
+                //Fills the arraylist wih relevant customer objects
+                Devices = LibraryFunctions.respository.findDevicesManufacturer(manufacturer);
+                //loops through the customers arraylist and adds the objects to the list models
+                for (Device Device : Devices) {
+                    listModel.addElement(Device);
+                }
+                //sets the list model
+                ResultsList.setModel(listModel);
+                break;
+            case 2:
+                //Retrieves DeviceID from the search bar
+                int CustomerID = Integer.parseInt(SearchBar.getText());
+                //Fills the arraylist wih relevant customer objects
+                Devices = LibraryFunctions.respository.findDevicesCustomerID(CustomerID);
+                //loops through the customers arraylist and adds the objects to the list models
+                for (Device Device : Devices) {
+                    listModel.addElement(Device);
+                }
+                //sets the list model
+                ResultsList.setModel(listModel);
+                break;
+            case 3:
+                //Retrieves customers name from the search bar
+                String model = SearchBar.getText();
+                //Fills the arraylist wih relevant customer objects
+                Devices = LibraryFunctions.respository.findDevicesModel(model);
+                //loops through the customers arraylist and adds the objects to the list models
+                for (Device Device : Devices) {
+                    listModel.addElement(Device);
+                }
+                //sets the list model
+                ResultsList.setModel(listModel);
+                break;
+            case 4:
+                //Retrieves TicketID from the search bar
+                int TicketID = Integer.parseInt(SearchBar.getText());
+                //Fills the arraylist wih relevant customer objects
+                Devices = LibraryFunctions.respository.findDevicesTicketID(TicketID);
+                //loops through the customers arraylist and adds the objects to the list models
+                for (Device Device : Devices) {
+                    listModel.addElement(Device);
+                }
+                //sets the list model
+                ResultsList.setModel(listModel);
+                break;
+        }
+    }//GEN-LAST:event_SearchBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -175,7 +257,8 @@ public class FindDevice extends javax.swing.JFrame {
     private javax.swing.JScrollPane Results;
     private javax.swing.JList<String> ResultsList;
     private javax.swing.JTextField SearchBar;
-    private javax.swing.JComboBox<String> SearchCondtion;
+    private javax.swing.JButton SearchBtn;
+    private javax.swing.JComboBox<String> SearchCondition;
     private javax.swing.JLabel TechnicianNameField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

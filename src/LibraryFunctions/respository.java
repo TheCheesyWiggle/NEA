@@ -26,6 +26,7 @@ public class respository {
             System.out.println("Error in the repository class: " + e);
         }
         return null;
+        
     }
     
     // <editor-fold defaultstate="collapsed" desc="Technician operations">
@@ -267,6 +268,31 @@ public class respository {
             ArrayList<Customer> CustomerList = new ArrayList<>();
                 try {
                     String sql = "SELECT * FROM Customer";
+                    //connects to the databse 
+                    ResultSet rs = executeSQL.executeQuery(getConnection(), sql);
+                    //while there are more records in the database = true
+                    while (rs.next()) {
+                        //tures data from database into a object
+                        Customer nextCustomer = new Customer(rs.getInt("CustomerID"),rs.getString("FirstName"),rs.getString("LastName"),rs.getString("Email"),rs.getString("PhoneNumber"),rs.getString("Address"),rs.getString("Postcode"));
+                        //adds new object to the array list
+                        CustomerList.add(nextCustomer);
+                    }
+
+                    con.close();
+                } catch (Exception e) {
+                    System.out.println("Error in the repository class: " + e);
+
+                }
+                return CustomerList;
+        } 
+        // </editor-fold> //Works
+        
+        // <editor-fold defaultstate="collapsed" desc="Find All Customers">
+        public static ArrayList<Customer> findCustomersID(int CustomerID){
+            ArrayList<Customer> CustomerList = new ArrayList<>();
+                try {
+                    String sql = "SELECT * FROM Customer \n"
+                            + "WHERE ((Customer.CustomerID)='" + CustomerID + "')";;
                     //connects to the databse 
                     ResultSet rs = executeSQL.executeQuery(getConnection(), sql);
                     //while there are more records in the database = true
@@ -734,10 +760,7 @@ public class respository {
         
     // </editor-fold>
         
-    
-    
-
-// </editor-fold>
+    // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="Edit functions">  
     public static void editCustomer(){
@@ -889,40 +912,7 @@ public class respository {
     /*
     Tick List
     ----------------------------------------------------------------------------
-    find customer     (Should be done maybe have a check over)
-        - all       x
-        - name      x 
-        - device ID x  
-        - ticket    x
-
-    find device
-        - all           x
-        - device ID     x   
-        - manufacturer  x
-        - customer ID   x
-        - model         x
-        - ticket   ID   x
-        -ticket opendate? (Not neccessary)
-
-    find ticket   (Should be done maybe have a check over)
-        - all                     x
-        - customer                x
-        - customer first name     x
-        - model                   x
-        - date                    x 
-        - device ID               x
-
-    find notes
-        - all                     x
-        - noteID                  x
-        - device ID               x
-        - ticket ID               x
-    
-    find Technicain  
-        - all                     x     
-        - TechnicainID            x
-        - tech name               x
-        - ticket ID               x
+    Find functions done :)
     
     add technican
     add device     X
@@ -934,7 +924,12 @@ public class respository {
     overwrite device
     overwrite customer
     overwrite tickets
-
+    
+    email validation
+    password hashing
+    merge sort
+    
+    
     check through all the comments so they make sense
     
     */
