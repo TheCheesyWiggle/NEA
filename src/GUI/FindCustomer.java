@@ -15,9 +15,9 @@ import javax.swing.DefaultListModel;
  */
 public class FindCustomer extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FindCustomer
-     */
+    //public static Customer SelectedCustomer;
+    //private ArrayList<Customer> Customers = new ArrayList<Customer>(); 
+    
     public FindCustomer() {
         initComponents();
     }
@@ -55,6 +55,11 @@ public class FindCustomer extends javax.swing.JFrame {
 
         TechnicianNameField.setText("Technician Name");
 
+        ResultsList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ResultsListMouseClicked(evt);
+            }
+        });
         Results.setViewportView(ResultsList);
 
         MainMenuBtn.setText("Return to Main Menu");
@@ -104,7 +109,7 @@ public class FindCustomer extends javax.swing.JFrame {
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                             .addComponent(SearchCondition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addComponent(Results, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 22, Short.MAX_VALUE))
+                        .addGap(0, 9, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(EditCustomerBtn)
@@ -151,11 +156,15 @@ public class FindCustomer extends javax.swing.JFrame {
     }//GEN-LAST:event_MainMenuBtnActionPerformed
 
     private void EditCustomerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditCustomerBtnActionPerformed
-        
+
+        System.out.println(ResultsList.getSelectedValuesList());
+        EditCustomer editcust = new EditCustomer();
+        editcust.setVisible(true);
+        this.dispose();
+        //SelectedCustomer = Customers.get(ResultsList.getSelectedIndex());
     }//GEN-LAST:event_EditCustomerBtnActionPerformed
 
     private void SearchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchBtnActionPerformed
-        //based on search properties search for the dufferent customers
         ArrayList<Customer> Customers = new ArrayList<Customer>(); 
         //creates a list model to edit later
         DefaultListModel listModel = new DefaultListModel();
@@ -165,7 +174,7 @@ public class FindCustomer extends javax.swing.JFrame {
                 //Retrieves customerID from the search bar
                 int CustomerID = Integer.parseInt(SearchBar.getText());
                 //Fills the arraylist wih relevant customer objects
-                Customers = Customers = LibraryFunctions.respository.findCustomersID(CustomerID); 
+                Customers = LibraryFunctions.respository.findCustomersID(CustomerID); 
                 //loops through the customers arraylist and adds the objects to the list models
                 for(Customer customer : Customers){
                     listModel.addElement(customer);
@@ -209,8 +218,11 @@ public class FindCustomer extends javax.swing.JFrame {
                 break;
         }
         
-        //comment code
     }//GEN-LAST:event_SearchBtnActionPerformed
+
+    private void ResultsListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ResultsListMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ResultsListMouseClicked
 
     /**
      * @param args the command line arguments

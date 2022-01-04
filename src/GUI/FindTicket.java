@@ -5,6 +5,12 @@
  */
 package GUI;
 
+import LibraryFunctions.respository;
+import Objects.Customer;
+import Objects.Ticket;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+
 /**
  *
  * @author fv200399
@@ -44,14 +50,9 @@ public class FindTicket extends javax.swing.JFrame {
 
         TechnicianNameLabel.setText("Technician Name");
 
-        ResultsList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         Results.setViewportView(ResultsList);
 
-        SearchCondition.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Name", "ID", "Device", "Open date" }));
+        SearchCondition.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Name", "Ticket ID", "Device ID", "Open date" }));
         SearchCondition.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SearchConditionActionPerformed(evt);
@@ -143,12 +144,68 @@ public class FindTicket extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void SearchConditionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchConditionActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_SearchConditionActionPerformed
 
     private void FindBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FindBtnActionPerformed
-        //Checks combo box and searches database accordingly
-        
+        ArrayList<Ticket> Tickets = new ArrayList<Ticket>(); 
+        //creates a list model to edit later
+        DefaultListModel listModel = new DefaultListModel();
+        //switch statement to check the serch condition
+        switch(SearchCondition.getSelectedIndex()){
+            case 0:
+                //Retrieves customers name from the search bar
+                String CustomerName = SearchBar.getText();
+                System.out.println(CustomerName);
+                //Fills the arraylist wih relevant ticket objects
+                Tickets = LibraryFunctions.respository.findTicketsCustomerFirstName(CustomerName); 
+                
+                //loops through the ticket arraylist and adds the objects to the list models
+                for(Ticket ticket : Tickets){
+                    System.out.println(ticket.toString());
+                    listModel.addElement(ticket);
+                }
+                //sets the list model
+                ResultsList.setModel(listModel);
+                break;
+
+            case 1:
+                //Retrieves TicketID from the search bar
+                int TicketID = Integer.parseInt(SearchBar.getText());
+                //Fills the arraylist wih relevant ticket objects
+                Tickets = respository.findTicketID(TicketID); 
+                //loops through the Ticket arraylist and adds the objects to the list models
+                for(Ticket ticket : Tickets){
+                    listModel.addElement(ticket);
+                }
+                //sets the list model
+                ResultsList.setModel(listModel);
+                break;
+            case 2:
+                //Retrieves DeviceID from the search bar
+                int DeviceID = Integer.parseInt(SearchBar.getText());
+                //Fills the arraylist wih relevant ticket objects
+                Tickets = respository.findTicketID(DeviceID); 
+                //loops through the Ticket arraylist and adds the objects to the list models
+                for(Ticket ticket : Tickets){
+                    listModel.addElement(ticket);
+                }
+                //sets the list model
+                ResultsList.setModel(listModel);
+                break;
+            case 3:
+                //Retrieves the date opened from the search bar
+                String OpenDate = SearchBar.getText();
+                //Fills the arraylist wih relevant ticket objects
+                Tickets = respository.findTicketsOpenDate(OpenDate); 
+                //loops through the Ticket arraylist and adds the objects to the list models
+                for(Ticket ticket : Tickets){
+                    listModel.addElement(ticket);
+                }
+                //sets the list model
+                ResultsList.setModel(listModel);
+                break;
+        }     
     }//GEN-LAST:event_FindBtnActionPerformed
 
     /**

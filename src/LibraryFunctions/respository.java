@@ -2,15 +2,16 @@
 package LibraryFunctions;
 
 import Objects.*;
+import java.security.MessageDigest;
 import java.sql.Date;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.xml.bind.DatatypeConverter;
 //This class gets things in and out of the database
 
 public class respository {
@@ -63,7 +64,7 @@ public class respository {
                     + "WHERE (((Technician.TechnicainID)='" + UserID + "'))";
             ResultSet rs = executeSQL.executeQuery(getConnection(), sql);
             while (rs.next()) {
-                Ticket nextTicket= new Ticket(rs.getInt("TicketID"),rs.getString("Issue"),rs.getString("RepairStatus"),rs.getDate("OpenDate").toLocalDate(),rs.getDate("CloseDate").toLocalDate(),rs.getInt("DeviceID"),rs.getInt("CustomerID"));
+                Ticket nextTicket= new Ticket(rs.getInt("TicketID"),rs.getString("Issue"),rs.getString("RepairStatus"),rs.getDate("OpenDate").toLocalDate(),rs.getDate("CloseDate").toLocalDate(),rs.getInt("DeviceID"));
                 TicketList.add(nextTicket);
             }
 
@@ -111,7 +112,32 @@ public class respository {
                 //while there are more records in the database = true
                 while (rs.next()) {
                     //tures data from database into a object
-                    Ticket nextTicket = new Ticket(rs.getInt("TicketID"),rs.getString("Issue"),rs.getString("RepairStatus"),rs.getDate("OpenDate").toLocalDate(),rs.getDate("CloseDate").toLocalDate(),rs.getInt("DeviceID"),rs.getInt("CustomerID"));
+                    Ticket nextTicket = new Ticket(rs.getInt("TicketID"),rs.getString("Issue"),rs.getString("RepairStatus"),rs.getDate("OpenDate").toLocalDate(),rs.getDate("CloseDate").toLocalDate(),rs.getInt("DeviceID"));
+                    //adds new object to the array list
+                    TicketList.add(nextTicket);
+                }
+
+                con.close();
+            } catch (Exception e) {
+                System.out.println("Error in the repository class: " + e);
+
+            }
+            return TicketList;
+        }
+        // </editor-fold> //Works
+        
+        // <editor-fold defaultstate="collapsed" desc="Find Tickets Ticket ID">
+        public static ArrayList<Ticket> findTicketID(int TicketID) {
+            ArrayList<Ticket> TicketList = new ArrayList<>();
+            try {
+
+                String sql = "SELECT * FROM Ticket WHERE TicketID ='"+TicketID+"'";
+                //connects to the databse 
+                ResultSet rs = executeSQL.executeQuery(getConnection(), sql);
+                //while there are more records in the database = true
+                while (rs.next()) {
+                    //tures data from database into a object
+                    Ticket nextTicket = new Ticket(rs.getInt("TicketID"),rs.getString("Issue"),rs.getString("RepairStatus"),rs.getDate("OpenDate").toLocalDate(),rs.getDate("CloseDate").toLocalDate(),rs.getInt("DeviceID"));
                     //adds new object to the array list
                     TicketList.add(nextTicket);
                 }
@@ -138,7 +164,7 @@ public class respository {
                 //while there are more records in the database = true
                 while (rs.next()) {
                     //tures data from database into a object
-                    Ticket nextTicket = new Ticket(rs.getInt("TicketID"),rs.getString("Issue"),rs.getString("RepairStatus"),rs.getDate("OpenDate").toLocalDate(),rs.getDate("CloseDate").toLocalDate(),rs.getInt("DeviceID"),rs.getInt("CustomerID"));
+                    Ticket nextTicket = new Ticket(rs.getInt("TicketID"),rs.getString("Issue"),rs.getString("RepairStatus"),rs.getDate("OpenDate").toLocalDate(),rs.getDate("CloseDate").toLocalDate(),rs.getInt("DeviceID"));
                     //adds new object to the array list
                     TicketList.add(nextTicket);
                 }
@@ -165,7 +191,7 @@ public class respository {
                 //while there are more records in the database = true
                 while (rs.next()) {
                     //tures data from database into a object
-                    Ticket nextTicket = new Ticket(rs.getInt("TicketID"),rs.getString("Issue"),rs.getString("RepairStatus"),rs.getDate("OpenDate").toLocalDate(),rs.getDate("CloseDate").toLocalDate(),rs.getInt("DeviceID"),rs.getInt("CustomerID"));
+                    Ticket nextTicket = new Ticket(rs.getInt("TicketID"),rs.getString("Issue"),rs.getString("RepairStatus"),rs.getDate("OpenDate").toLocalDate(),rs.getDate("CloseDate").toLocalDate(),rs.getInt("DeviceID"));
                     //adds new object to the array list
                     TicketList.add(nextTicket);
                 }
@@ -177,7 +203,7 @@ public class respository {
             }
             return TicketList;
         }
-        // </editor-fold> //Works
+        // </editor-fold> //need to rework SQL
         
         // <editor-fold defaultstate="collapsed" desc="Find Tickets with the Device model">
         public static ArrayList<Ticket> findTicketsModel(String deviceModel) {
@@ -192,7 +218,7 @@ public class respository {
                 //while there are more records in the database = true
                 while (rs.next()) {
                     //tures data from database into a object
-                    Ticket nextTicket = new Ticket(rs.getInt("TicketID"),rs.getString("Issue"),rs.getString("RepairStatus"),rs.getDate("OpenDate").toLocalDate(),rs.getDate("CloseDate").toLocalDate(),rs.getInt("DeviceID"),rs.getInt("CustomerID"));
+                    Ticket nextTicket = new Ticket(rs.getInt("TicketID"),rs.getString("Issue"),rs.getString("RepairStatus"),rs.getDate("OpenDate").toLocalDate(),rs.getDate("CloseDate").toLocalDate(),rs.getInt("DeviceID"));
                     //adds new object to the array list
                     TicketList.add(nextTicket);
                 }
@@ -218,7 +244,7 @@ public class respository {
                 //while there are more records in the database = true
                 while (rs.next()) {
                     //tures data from database into a object
-                    Ticket nextTicket = new Ticket(rs.getInt("TicketID"),rs.getString("Issue"),rs.getString("RepairStatus"),rs.getDate("OpenDate").toLocalDate(),rs.getDate("CloseDate").toLocalDate(),rs.getInt("DeviceID"),rs.getInt("CustomerID"));
+                    Ticket nextTicket = new Ticket(rs.getInt("TicketID"),rs.getString("Issue"),rs.getString("RepairStatus"),rs.getDate("OpenDate").toLocalDate(),rs.getDate("CloseDate").toLocalDate(),rs.getInt("DeviceID"));
                     //adds new object to the array list
                     TicketList.add(nextTicket);
                 }
@@ -245,7 +271,7 @@ public class respository {
                 //while there are more records in the database = true
                 while (rs.next()) {
                     //tures data from database into a object
-                    Ticket nextTicket = new Ticket(rs.getInt("TicketID"),rs.getString("Issue"),rs.getString("RepairStatus"),rs.getDate("OpenDate").toLocalDate(),rs.getDate("CloseDate").toLocalDate(),rs.getInt("DeviceID"),rs.getInt("CustomerID"));
+                    Ticket nextTicket = new Ticket(rs.getInt("TicketID"),rs.getString("Issue"),rs.getString("RepairStatus"),rs.getDate("OpenDate").toLocalDate(),rs.getDate("CloseDate").toLocalDate(),rs.getInt("DeviceID"));
                     //adds new object to the array list
                     TicketList.add(nextTicket);
                 }
@@ -267,6 +293,7 @@ public class respository {
         public static ArrayList<Customer> findAllCustomers(){
             ArrayList<Customer> CustomerList = new ArrayList<>();
                 try {
+                    //retrieves everything from cusomer table
                     String sql = "SELECT * FROM Customer";
                     //connects to the databse 
                     ResultSet rs = executeSQL.executeQuery(getConnection(), sql);
@@ -291,6 +318,7 @@ public class respository {
         public static ArrayList<Customer> findCustomersID(int CustomerID){
             ArrayList<Customer> CustomerList = new ArrayList<>();
                 try {
+                    //retrieves everything from cusomer table where customer ID equals customer ID inputted by the user
                     String sql = "SELECT * FROM Customer \n"
                             + "WHERE ((Customer.CustomerID)='" + CustomerID + "')";;
                     //connects to the databse 
@@ -316,7 +344,7 @@ public class respository {
         public static ArrayList<Customer> findCustomerTickets(int TicketID) {
             ArrayList<Customer> CustomerList = new ArrayList<>();
             try {
-                // select ticket where customer id of the ticket = customer id the customer from the customer with the same name thats passed through the
+                //retrieves everything from customer table where customer ID in the customer table equals customer ID from the ticket table inputted by the user
                 String sql = "SELECT Customer.* \n"
                     + "FROM Ticket INNER JOIN Customer ON Customer.CustomerID = Ticket.CustomerID \n"
                     + "WHERE ((Ticket.TicketID)='" + TicketID + "')";
@@ -337,7 +365,7 @@ public class respository {
             }
             return CustomerList;
         }
-        //</editor-fold> // Works
+        //</editor-fold> // Worksloo
         
         // <editor-fold defaultstate="collapsed" desc="Find Customer with First Name">
         public static ArrayList<Customer> findCustomersFirstName(String CustomerName){
@@ -762,22 +790,122 @@ public class respository {
         
     // </editor-fold>
     
-    // <editor-fold defaultstate="collapsed" desc="Edit functions">  
-    public static void editCustomer(){
+    // <editor-fold defaultstate="collapsed" desc="Edit functions"> 
         
-    }
-    public static void editTechnicain(){
+        // <editor-fold defaultstate="collapsed" desc="Customer functions">  
+        public static void editCustomer(Customer customer){
+            try {
+                String sql = "SELECT Customer.* FROM Customer WHERE CustomerID = '"+customer.getID()+"'";
+                ResultSet rs = executeSQL.executeQuery(getConnection(), sql);
+                if (rs.next()) {
+                    rs.moveToInsertRow();
+                    //Primary key not needed as it is an autonumber, it adds that field automatically
+                    rs.updateString("FirstName", customer.getFirst_Name());
+                    rs.updateString("LastName", customer.getLast_Name());
+                    rs.updateString("Email", customer.getEmail());
+                    rs.updateString("PhoneNumber", customer.getPhone_Number());
+                    rs.updateString("Address", customer.getAddress());
+                    rs.updateString("Postcode", customer.getPostcode());
+                    rs.updateRow();
+                }
+                System.out.println("Successful save!");
+                con.close();
+            } catch (Exception e) {
+                System.out.println("Error in the repository class: " + e);
+            }
+        }
+        // </editor-fold> //works
         
-    }
-    public static void editTicket(){
+        // <editor-fold defaultstate="collapsed" desc="Technician functions">  
+        public static void editTechnician(Technician tech){
+            try {
+            String sql = "SELECT Technician.* FROM Technician WHERE TechnicianID = '"+tech.getId()+"'";
+            ResultSet rs = executeSQL.executeQuery(getConnection(), sql);
+            if (rs.next()) {
+                rs.moveToInsertRow();
+                //Primary key not needed as it is an autonumber, it adds that field automatically
+                rs.updateString("Fullname", tech.getName());
+                rs.updateString("Username", tech.getUsername());
+                rs.updateString("Password", Hash(tech.getPassword()));
+                rs.updateString("Email", tech.getCompany_Email());
+                rs.updateBoolean("Admin", tech.isAdmin());
+
+                rs.updateRow();
+            }
+            System.out.println("Successful save!");
+            con.close();
+            } catch (Exception e) {
+                System.out.println("Error in the repository class: " + e);
+            }
+        }
+        // </editor-fold> //works
+    
+        // <editor-fold defaultstate="collapsed" desc="Ticket functions">  
+        public static void editTicket(Ticket ticket){
+            try {
+            String sql = "SELECT Ticket.* FROM Ticket WHERE TicketID = '"+ticket.getID()+"'";
+            ResultSet rs = executeSQL.executeQuery(getConnection(), sql);
+            if (rs.next()) {
+                rs.moveToInsertRow();
+                //Primary key not needed as it is an autonumber, it adds that field automatically
+                rs.updateString("Issue", ticket.getIssue() );
+                rs.updateString("RepairStatus", ticket.getRepair_Status());
+                rs.updateDate("OpenDate", Date.valueOf(ticket.getOpen_Date()));
+                //close date not needed
+                rs.updateInt("DeviceID", ticket.getDevice_Id());
+                rs.updateRow();
+            }
+            System.out.println("Successful save!");
+            con.close();
+        } catch (Exception e) {
+            System.out.println("Error in the repository class: " + e);
+        }
+        }
+        // </editor-fold> //works
+    
+        // <editor-fold defaultstate="collapsed" desc="device functions">  
+        public static void editDevice(Device device){
+            try {
+                String sql = "SELECT Device.* FROM Device WHERE DeviceID = '"+device.getID()+"'";
+                ResultSet rs = executeSQL.executeQuery(getConnection(), sql);
+                if (rs.next()) {
+                    rs.moveToInsertRow();
+                    //Primary key not needed as it is an autonumber, it adds that field automatically
+                    rs.updateInt("CustomerID", device.getCustomer_Id());
+                    rs.updateString("Manufacturer", device.getManufacturer());
+                    rs.updateString("Model", device.getModel());
+                    rs.updateString("Priority", device.getPriority());
+                    rs.updateRow();
+                }
+                System.out.println("Successful save!");
+                con.close();
+            } catch (Exception e) {
+                System.out.println("Error in the repository class: " + e);
+            }
+        }
+        // </editor-fold> //works
+    
+        // <editor-fold defaultstate="collapsed" desc="Note functions">  
+        public static void editNotes(Note note){
+            try {
+            String sql = "SELECT Note.* FROM Note WHERE NoteID = '"+note.getId()+"'";
+            ResultSet rs = executeSQL.executeQuery(getConnection(), sql);
+            if (rs.next()) {
+                rs.moveToInsertRow();
+                //Primary key not needed as it is an autonumber, it adds that field automatically
+                rs.updateString("Content", note.getContent() );
+                rs.updateInt("TicketID", note.getTicket_Id());
+                rs.updateInt("TechnicianID", note.getTechnicain_Id());
+                rs.updateRow();
+            }
+            System.out.println("Successful save!");
+            con.close();
+            } catch (Exception e) {
+                System.out.println("Error in the repository class: " + e);
+            }
+        }
+        // </editor-fold> //works
         
-    }
-    public static void editDevice(){
-        
-    }
-    public static void editNotes(){
-        
-    }
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="Add functions">  
@@ -815,11 +943,10 @@ public class respository {
             if (rs.next()) {
                 rs.moveToInsertRow();
                 //Primary key not needed as it is an autonumber, it adds that field automatically
-                rs.updateInt("Customer_ID", newDevice.getCustomer_Id());
+                rs.updateInt("CustomerID", newDevice.getCustomer_Id());
+                rs.updateString("Manufacturer", newDevice.getManufacturer());
                 rs.updateString("Model", newDevice.getModel());
-                rs.updateString("Manfacturer", newDevice.getManufacturer());
                 rs.updateString("Priority", newDevice.getPriority());
-
                 rs.insertRow();
             }
             System.out.println("Successful save!");
@@ -828,21 +955,21 @@ public class respository {
             System.out.println("Error in the repository class: " + e);
         }
     }
-    // </editor-fold> //Works
+    // </editor-fold> //doesnt work
     
     // <editor-fold defaultstate="collapsed" desc="Add Ticket">   
     public static void AddTicket(Ticket newTicket){
-                try {
+            try {
             String sql = "SELECT Ticket.* FROM Ticket";
             ResultSet rs = executeSQL.executeQuery(getConnection(), sql);
             if (rs.next()) {
                 rs.moveToInsertRow();
                 //Primary key not needed as it is an autonumber, it adds that field automatically
-                //rs.updateString("Issue", newTicket.getIssue() );
-                //rs.updateDate("Date", newTicket.getOpen_Date());
-                //rs.updateInt("Device_ID", newTicket);
-                //rs.updateInt("Customer_ID", newTicket);
-
+                rs.updateString("Issue", newTicket.getIssue() );
+                rs.updateString("RepairStatus", newTicket.getRepair_Status());
+                rs.updateDate("OpenDate", Date.valueOf(newTicket.getOpen_Date()));
+                //close date not needed
+                rs.updateInt("DeviceID", newTicket.getDevice_Id());
                 rs.insertRow();
             }
             System.out.println("Successful save!");
@@ -862,8 +989,8 @@ public class respository {
                 rs.moveToInsertRow();
                 //Primary key not needed as it is an autonumber, it adds that field automatically
                 rs.updateString("Content", newNote.getContent() );
-                rs.updateInt("Ticket_ID", newNote.getTicket_Id());
-                rs.updateInt("Technican_ID", newNote.getTechnicain_Id());
+                rs.updateInt("TicketID", newNote.getTicket_Id());
+                rs.updateInt("TechnicianID", newNote.getTechnicain_Id());
 
                 rs.insertRow();
             }
@@ -873,7 +1000,7 @@ public class respository {
             System.out.println("Error in the repository class: " + e);
         }
     }
-    // </editor-fold> //Should Work
+    // </editor-fold> //Works
     
     //Admin function
     // <editor-fold defaultstate="collapsed" desc="Add Technicain">   
@@ -886,7 +1013,7 @@ public class respository {
                 //Primary key not needed as it is an autonumber, it adds that field automatically
                 rs.updateString("Fullname", newTechnician.getName());
                 rs.updateString("Username", newTechnician.getUsername());
-                rs.updateString("Password", newTechnician.getPassword());
+                rs.updateString("Password", Hash(newTechnician.getPassword()));
                 rs.updateString("Email", newTechnician.getCompany_Email());
                 rs.updateBoolean("Admin", newTechnician.isAdmin());
 
@@ -898,35 +1025,62 @@ public class respository {
             System.out.println("Error in the repository class: " + e);
         }
     }
-    // </editor-fold> //Should work
+    // </editor-fold> //Works
     
     // </editor-fold>
     
+    // <editor-fold defaultstate="collapsed" desc="Pattern Matching">
     public static boolean emailValdation(String email){
-        Pattern pattern = Pattern.compile("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");
-        Matcher matcher = pattern.matcher(email);
-        boolean valid = matcher.matches();
-        return valid;
+        //email string pass through 
+        Pattern pattern = Pattern.compile("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$");//creates the pattern to compare against
+        Matcher matcher = pattern.matcher(email);//checks if the string follows the pattern
+        boolean valid = matcher.matches();//creates a boolean value to check if the sring matches the pattern
+        return valid;//returns true or false
     }
     
+    public static boolean phoneNumberValdation(String phoneNumber){
+        //email string pass through 
+        Pattern pattern = Pattern.compile("^[0-9]$");//creates the pattern to compare against
+        Matcher matcher = pattern.matcher(phoneNumber);//checks if the string follows the pattern
+        boolean valid = matcher.matches();//creates a boolean value to check if the sring matches the pattern
+        return valid;//returns true or false
+    }
+    //</editor-fold>
+    
+    public static String Hash(String password){
+        //initailizes 
+        String result = "";
+        //try catch handles any errors which occur
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");//grabs the SHA256 hashing algorithm
+            byte[] hash = digest.digest(password.getBytes("UTF-8"));//converts string to bytes using UTF-8 encoding
+            return DatatypeConverter.printHexBinary(hash); //returns as string 
+        }catch(Exception ex) {
+            ex.printStackTrace();//prints error
+        }
+        return password;
+    }
+
+    public static ArrayList<Ticket> mergesort(ArrayList<Ticket> ticketList){
+        if (ticketList.size() >= 2) {
+            Ticket[] left = new Ticket[ticketList.size() / 2];
+            Ticket[] right = new Ticket[ticketList.size()-ticketList.size() / 2];
+        }
+        return ticketList;
+    }
+        
     /*
     Tick List
     ----------------------------------------------------------------------------
-    Find functions done :)
+    Find functions :)
+    Add functions :)
+    Overwrite functions :)
     
-    add technican
-    add device     X
-    add customer   X
-    write notes
-    open tickets
-
-    overwrite technican
-    overwrite device
-    overwrite customer
-    overwrite tickets
+    email validation  :)
+    password hashing  :)
     
-    email validation
-    password hashing
+    
+    phone number validation
     merge sort
     
     

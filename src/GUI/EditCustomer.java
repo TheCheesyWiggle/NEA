@@ -5,6 +5,10 @@
  */
 package GUI;
 
+import Objects.Customer;
+import GUI.FindCustomer.*;
+import LibraryFunctions.respository;
+
 /**
  *
  * @author fv200399
@@ -13,9 +17,12 @@ public class EditCustomer extends javax.swing.JFrame {
 
     /**
      * Creates new form EditCustomer
+     * @param currentCustomer
      */
     public EditCustomer() {
         initComponents();
+        InvalidEmail.setVisible(false);
+        InvalidPhonenumber.setVisible(false);
     }
 
     /**
@@ -47,6 +54,8 @@ public class EditCustomer extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         CustomerIDField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        InvalidEmail = new javax.swing.JLabel();
+        InvalidPhonenumber = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -96,7 +105,21 @@ public class EditCustomer extends javax.swing.JFrame {
 
         jLabel6.setText("Phone Number:");
 
+        CustomerIDField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CustomerIDFieldActionPerformed(evt);
+            }
+        });
+
         jLabel2.setText("Customer ID:");
+
+        InvalidEmail.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        InvalidEmail.setForeground(new java.awt.Color(255, 0, 0));
+        InvalidEmail.setText("Invalid Email");
+
+        InvalidPhonenumber.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        InvalidPhonenumber.setForeground(new java.awt.Color(255, 0, 0));
+        InvalidPhonenumber.setText("Invalid PhoneNumber");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -112,9 +135,9 @@ public class EditCustomer extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(SaveBtn)
-                        .addGap(30, 30, 30)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(RefreshBtn)
-                        .addGap(38, 38, 38)
+                        .addGap(18, 18, 18)
                         .addComponent(MainMenuBtn))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(44, 44, 44)
@@ -125,22 +148,25 @@ public class EditCustomer extends javax.swing.JFrame {
                             .addComponent(jLabel6)
                             .addComponent(jLabel7)
                             .addComponent(jLabel8)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2)))
+                            .addComponent(jLabel2))
                         .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(CustomerIDField)
-                            .addComponent(FirstNameField)
-                            .addComponent(LastNameField)
-                            .addComponent(EmailField)
-                            .addComponent(PhoneNumberField)
-                            .addComponent(AddressField)
-                            .addComponent(PostcodeField, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(115, 115, 115)
-                        .addComponent(jLabel9)))
-                .addContainerGap(35, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel9)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(CustomerIDField)
+                                .addComponent(FirstNameField)
+                                .addComponent(LastNameField)
+                                .addComponent(EmailField)
+                                .addComponent(PhoneNumberField)
+                                .addComponent(AddressField)
+                                .addComponent(PostcodeField, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(75, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(61, 61, 61)
+                .addComponent(InvalidEmail)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(InvalidPhonenumber)
+                .addGap(72, 72, 72))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,9 +175,13 @@ public class EditCustomer extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(TechnicianNameLabel))
-                .addGap(32, 32, 32)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(InvalidEmail)
+                    .addComponent(InvalidPhonenumber))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CustomerIDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
@@ -201,26 +231,31 @@ public class EditCustomer extends javax.swing.JFrame {
     }//GEN-LAST:event_FirstNameFieldActionPerformed
 
     private void SaveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveBtnActionPerformed
-    /*
+    
     //Grabs all the values inputted by the User
-        String FirstName = FirstNameField.getText();
-        String LastName = LastNameField.getText();
-        String Email = EmailField.getText();
-        String PhoneNumber = PhoneNumberField.getText();
-        String Address = AddressField.getText();
-        String Postcode = PostcodeField.getText();
-
-        //creates it into an object (For customerID 0 is a place holder as the database automatically fills it in)
-        Customer newCustomer = new Customer(0,FirstName,LastName,Email,PhoneNumber,Address,Postcode);
-        respository.AddCustomer(newCustomer);
+    int CustomerID =  Integer.parseInt(CustomerIDField.getText());
+    String FirstName = FirstNameField.getText();
+    String LastName = LastNameField.getText();
+    String Email = EmailField.getText();
+    String PhoneNumber = PhoneNumberField.getText();
+    String Address = AddressField.getText();
+    String Postcode = PostcodeField.getText();
+    if(respository.emailValdation(Email) ){
+       //creates it into an object get the right change customer id 
+        Customer newCustomer = new Customer(CustomerID,FirstName,LastName,Email,PhoneNumber,Address,Postcode);
+        respository.editCustomer(newCustomer);
 
         //refreshes the page
-        AddCustomer addCust = new AddCustomer();
-        addCust.setVisible(true);
+        EditCustomer editCust = new EditCustomer();
+        editCust.setVisible(true);
         this.dispose();
-        verify if the email is a valid
-        Adds to local customer arraylist since it will probably been used again soon
-        */
+    }
+    else{
+        InvalidEmail.setVisible(true);
+    }
+
+        //Adds to local customer arraylist since it will probably been used again soon
+        
     }//GEN-LAST:event_SaveBtnActionPerformed
 
     private void MainMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MainMenuBtnActionPerformed
@@ -229,10 +264,16 @@ public class EditCustomer extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_MainMenuBtnActionPerformed
 
+    private void CustomerIDFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CustomerIDFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CustomerIDFieldActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -269,6 +310,8 @@ public class EditCustomer extends javax.swing.JFrame {
     private javax.swing.JTextField CustomerIDField;
     private javax.swing.JTextField EmailField;
     private javax.swing.JTextField FirstNameField;
+    private javax.swing.JLabel InvalidEmail;
+    private javax.swing.JLabel InvalidPhonenumber;
     private javax.swing.JTextField LastNameField;
     private javax.swing.JToggleButton MainMenuBtn;
     private javax.swing.JTextField PhoneNumberField;

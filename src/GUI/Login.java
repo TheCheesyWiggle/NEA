@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import static LibraryFunctions.respository.Hash;
+
 /**
  *
  * @author Finn
@@ -117,9 +119,9 @@ public class Login extends javax.swing.JFrame {
     private void LoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginBtnActionPerformed
         //grabs username and password from the gui
         String username = usernameField.getText();
-        String password = passwordField.getText();
+        String password = Hash(passwordField.getText());
         //checks if the username and password are valid
-        if((username.equals("test"))&&(password.equals("test"))){
+        if((username.equals("test"))&&(password.equals("9F86D081884C7D659A2FEAA0C55AD015A3BF4F1B2B0B822CD15D6C15B0F00A08"))){
             //runs main menu window
             MainMenu main = new MainMenu();
             main.setVisible(true);
