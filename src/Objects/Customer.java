@@ -92,4 +92,6 @@ public class Customer {
         return ID + "," + First_Name + "," + Last_Name + "," + Email + "," +Phone_Number + "," + Address + "," + Postcode;
     }
     //</editor-fold>
+    
+    
 }
