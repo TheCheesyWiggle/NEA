@@ -14,15 +14,13 @@ public class Device {
     private int ID;
     private String Model;
     private String Manufacturer;
-    private String Priority;
     private int Customer_Id;
     
     //<editor-fold defaultstate="collapsed" desc="Constructors">
-    public Device(int ID, String Model, String Manufacturer, String Priority, int Customer_Id) {
+    public Device(int ID, String Model, String Manufacturer, int Customer_Id) {
         this.ID = ID;
         this.Model = Model;
         this.Manufacturer = Manufacturer;
-        this.Priority = Priority;
         this.Customer_Id = Customer_Id;
 
     }
@@ -61,19 +59,12 @@ public class Device {
         this.Manufacturer = Manufacturer;
     }
 
-    public String getPriority() {
-        return Priority;
-    }
-
-    public void setPriority(String Priority) {
-        this.Priority = Priority;
-    }
     //</editor-fold>
     
     //<editor-fold defaultstate="collapsed" desc="Prints all data">
     @Override
     public String toString() {
-        return ID+ "," + Model + "," + Manufacturer + "," + Priority + "," + Customer_Id ;
+        return ID+ "," + Model + "," + Manufacturer + "," + Customer_Id ;
     }
 
     //</editor-fold>

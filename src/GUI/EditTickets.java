@@ -51,8 +51,16 @@ public class EditTickets extends javax.swing.JFrame {
         DeviceIDField = new javax.swing.JTextField();
         CustomerIDField1 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        PriorityField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        IssueField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IssueFieldActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("DeviceID:");
 
@@ -115,6 +123,14 @@ public class EditTickets extends javax.swing.JFrame {
 
         jLabel8.setText("Ticket ID:");
 
+        jLabel9.setText("Priority:");
+
+        PriorityField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PriorityFieldActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -158,7 +174,11 @@ public class EditTickets extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(RepairStatus, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(OpenDateField)
-                                    .addComponent(IssueField, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(IssueField, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addGap(18, 18, 18)
+                                .addComponent(PriorityField, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(163, 163, 163)
                         .addComponent(jLabel7)))
@@ -193,16 +213,21 @@ public class EditTickets extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(RepairStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
+                .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(OpenDateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AddDeviceBtn)
-                    .addComponent(SaveBtn)
-                    .addComponent(MainMenuBtn)
-                    .addComponent(FindDeviceBtn))
+                    .addComponent(jLabel9)
+                    .addComponent(PriorityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(OpenDateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(AddDeviceBtn)
+                            .addComponent(SaveBtn)
+                            .addComponent(MainMenuBtn)
+                            .addComponent(FindDeviceBtn)))
+                    .addComponent(jLabel4))
                 .addGap(23, 23, 23))
         );
 
@@ -235,11 +260,12 @@ public class EditTickets extends javax.swing.JFrame {
         int DeviceID = Integer.parseInt(DeviceIDField.getText());
         String Issue = IssueField.getText();
         String RepairStat = RepairStatus.getItemAt(RepairStatus.getSelectedIndex());
+        int Priority = Integer.parseInt(PriorityField.getText());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate startdate = LocalDate.parse(OpenDateField.getText(), formatter);
         LocalDate closedate = LocalDate.parse("01/01/0001", formatter);
 
-        Ticket newTicket = new Ticket(0,Issue,RepairStat,startdate,closedate,DeviceID);
+        Ticket newTicket = new Ticket(0,Issue,RepairStat,Priority,startdate,closedate,DeviceID);
         respository.AddTicket(newTicket);
     }//GEN-LAST:event_SaveBtnActionPerformed
 
@@ -247,6 +273,14 @@ public class EditTickets extends javax.swing.JFrame {
         FindDevice FD = new FindDevice();
         FD.setVisible(true);
     }//GEN-LAST:event_FindDeviceBtnActionPerformed
+
+    private void IssueFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IssueFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_IssueFieldActionPerformed
+
+    private void PriorityFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PriorityFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PriorityFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -292,6 +326,7 @@ public class EditTickets extends javax.swing.JFrame {
     private javax.swing.JTextField IssueField;
     private javax.swing.JButton MainMenuBtn;
     private javax.swing.JFormattedTextField OpenDateField;
+    private javax.swing.JTextField PriorityField;
     private javax.swing.JComboBox<String> RepairStatus;
     private javax.swing.JButton SaveBtn;
     private javax.swing.JLabel TechnicianNameLabel;
@@ -303,5 +338,6 @@ public class EditTickets extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     // End of variables declaration//GEN-END:variables
 }

@@ -71,6 +71,11 @@
                                   <Component id="IssueField" alignment="1" min="-2" pref="208" max="-2" attributes="0"/>
                               </Group>
                           </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="PriorityField" min="-2" pref="208" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -117,17 +122,24 @@
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="RepairStatus" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="OpenDateField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="PriorityField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="AddDeviceBtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="SaveBtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="MainMenuBtn" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="FindDeviceBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="OpenDateField" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="AddDeviceBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="SaveBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="MainMenuBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="FindDeviceBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
           </Group>
@@ -136,6 +148,9 @@
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JTextField" name="IssueField">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="IssueFieldActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
@@ -248,6 +263,16 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Ticket ID:"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel9">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Priority:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="PriorityField">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PriorityFieldActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

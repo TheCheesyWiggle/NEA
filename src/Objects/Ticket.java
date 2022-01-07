@@ -16,15 +16,17 @@ public class Ticket {
     private int ID;
     private String Issue;
     private String Repair_Status;
+    private int Priority;
     private LocalDate Open_Date;
     private LocalDate Close_Date;
     private int Device_Id;
     
     //<editor-fold defaultstate="collapsed" desc="Constructors">
-    public Ticket(int Ticket_Id, String Ticket_Issue, String Repair_Status, LocalDate Open_Date, LocalDate Close_Date, int Device_Id) {
+    public Ticket(int Ticket_Id, String Ticket_Issue, String Repair_Status,int Priority, LocalDate Open_Date, LocalDate Close_Date, int Device_Id) {
         this.ID = Ticket_Id;
         this.Issue = Ticket_Issue;
         this.Repair_Status = Repair_Status;
+        this.Priority = Priority;
         this.Open_Date = Open_Date;
         this.Close_Date = Close_Date;
         this.Device_Id = Device_Id;
@@ -56,6 +58,14 @@ public class Ticket {
         this.Repair_Status = Repair_Status;
     }
 
+    public int getPriority() {
+        return Priority;
+    }
+
+    public void setPriority(int Priority) {
+        this.Priority = Priority;
+    }
+    
     public LocalDate getOpen_Date() {
         return Open_Date;
     }
@@ -84,7 +94,7 @@ public class Ticket {
     //<editor-fold defaultstate="collapsed" desc="Prints all data">
     @Override
     public String toString() {
-        return ID + "," + Issue + "," + Repair_Status + "," + Open_Date + "," + Close_Date + "," + Device_Id;
+        return ID + "," + Issue + "," + Repair_Status + "," + Priority + "," + Open_Date + "," + Close_Date + "," + Device_Id;
     }
     //</editor-fold>
 }

@@ -49,6 +49,8 @@ public class OpenTicket extends javax.swing.JFrame {
         CustomerIDField = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        PriorityField = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,6 +112,14 @@ public class OpenTicket extends javax.swing.JFrame {
 
         jLabel7.setText("Open    Ticket");
 
+        PriorityField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PriorityFieldActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("Priority:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -142,15 +152,24 @@ public class OpenTicket extends javax.swing.JFrame {
                                         .addComponent(CustomerIDField, javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(DeviceIDField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE))))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel5))
-                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(RepairStatus, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(OpenDateField, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
-                                    .addComponent(IssueField))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGap(12, 12, 12)
+                                        .addComponent(jLabel4)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(OpenDateField))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel9)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(PriorityField, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel3)
+                                            .addComponent(jLabel5))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(RepairStatus, javax.swing.GroupLayout.Alignment.LEADING, 0, 208, Short.MAX_VALUE)
+                                            .addComponent(IssueField))))
                                 .addGap(113, 113, 113))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(184, 184, 184)
@@ -182,11 +201,15 @@ public class OpenTicket extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(RepairStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(PriorityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(OpenDateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(AddDeviceBtn)
                     .addComponent(SaveBtn)
@@ -229,13 +252,18 @@ public class OpenTicket extends javax.swing.JFrame {
         int DeviceID = Integer.parseInt(DeviceIDField.getText());
         String Issue = IssueField.getText();
         String RepairStat = RepairStatus.getItemAt(RepairStatus.getSelectedIndex());
+        int Priority = Integer.parseInt(PriorityField.getText());
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate startdate = LocalDate.parse(OpenDateField.getText(), formatter);
         LocalDate closedate = LocalDate.parse("01/01/0001", formatter);
         
-        Ticket newTicket = new Ticket(0,Issue,RepairStat,startdate,closedate,DeviceID);
+        Ticket newTicket = new Ticket(0,Issue,RepairStat,Priority,startdate,closedate,DeviceID);
         respository.AddTicket(newTicket);
     }//GEN-LAST:event_SaveBtnActionPerformed
+
+    private void PriorityFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PriorityFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PriorityFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -281,6 +309,7 @@ public class OpenTicket extends javax.swing.JFrame {
     private javax.swing.JTextField IssueField;
     private javax.swing.JButton MainMenuBtn;
     private javax.swing.JFormattedTextField OpenDateField;
+    private javax.swing.JTextField PriorityField;
     private javax.swing.JComboBox<String> RepairStatus;
     private javax.swing.JButton SaveBtn;
     private javax.swing.JLabel TechnicianNameLabel;
@@ -291,5 +320,6 @@ public class OpenTicket extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel9;
     // End of variables declaration//GEN-END:variables
 }
