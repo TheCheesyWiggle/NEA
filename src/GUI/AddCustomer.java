@@ -5,10 +5,9 @@
  */
 package GUI;
 
-import LibraryFunctions.respository;
 import Objects.*;
 import java.util.ArrayList;
-import libraryFunctions.*;
+import LibraryFunctions.*;
 /**
  *
  * @author fv200399
@@ -237,7 +236,7 @@ public class AddCustomer extends javax.swing.JFrame {
         String Address = AddressField.getText();
         String Postcode = PostcodeField.getText();
         
-        if(respository.emailValdation(Email) ){
+        if(PatternMatching.emailValdation(Email) ){
            //creates it into an object get the right change customer id 
             Customer newCustomer = new Customer(0,FirstName,LastName,Email,PhoneNumber,Address,Postcode);
             respository.editCustomer(newCustomer);

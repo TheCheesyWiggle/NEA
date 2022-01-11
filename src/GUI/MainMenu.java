@@ -5,6 +5,10 @@
  */
 package GUI;
 
+import Objects.Ticket;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+
 /**
  *
  * @author fv200399
@@ -16,7 +20,17 @@ public class MainMenu extends javax.swing.JFrame {
      */
     public MainMenu() {
         initComponents();
-        //make add technician button only visible to admin
+        ArrayList<Ticket> Tickets = LibraryFunctions.respository.findAllTickets(); 
+        //creates a list model to edit later
+        DefaultListModel listModel = new DefaultListModel();
+        //loops through the ticket arraylist and adds the objects to the list models
+        for(Ticket ticket : Tickets){
+            System.out.println(ticket.toString());
+            listModel.addElement(ticket);
+        }
+        //sets the list model
+        OpenTicketList.setModel(listModel);
+        ClosedTicketsList.setModel(listModel);
 
     }
 
@@ -42,7 +56,6 @@ public class MainMenu extends javax.swing.JFrame {
         addCustomerBtn = new javax.swing.JButton();
         findTicketBtn = new javax.swing.JButton();
         addTechnicianBtn = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
         findCustomerBtn = new javax.swing.JButton();
         AddDeviceBtn = new javax.swing.JButton();
         AddNoteBtn = new javax.swing.JButton();
@@ -58,11 +71,6 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
-        OpenTicketList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         OpenTickets.setViewportView(OpenTicketList);
 
         jLabel1.setText("Open Tickets");
@@ -107,8 +115,6 @@ public class MainMenu extends javax.swing.JFrame {
                 addTechnicianBtnActionPerformed(evt);
             }
         });
-
-        jLabel4.setText("Pie Chart of open Tickets compared to closed tickets in last 7 days");
 
         findCustomerBtn.setText("Find Customer");
         findCustomerBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -164,10 +170,6 @@ public class MainMenu extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(ClosedTickets, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(LogOffBtn)
@@ -179,7 +181,7 @@ public class MainMenu extends javax.swing.JFrame {
                             .addComponent(addCustomerBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
                             .addComponent(AddDeviceBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(AddNoteBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 130, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(FindDeviceBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
@@ -230,11 +232,7 @@ public class MainMenu extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)))
                         .addComponent(addTechnicianBtn)))
                 .addGap(4, 4, 4)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ClosedTickets, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(ClosedTickets, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(53, Short.MAX_VALUE))
         );
 
@@ -348,7 +346,6 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JButton openTicketBtn;
     private javax.swing.JLabel technicianName;
     // End of variables declaration//GEN-END:variables

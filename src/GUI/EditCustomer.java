@@ -7,7 +7,7 @@ package GUI;
 
 import Objects.Customer;
 import GUI.FindCustomer.*;
-import LibraryFunctions.respository;
+import LibraryFunctions.*;
 
 /**
  *
@@ -240,7 +240,7 @@ public class EditCustomer extends javax.swing.JFrame {
     String PhoneNumber = PhoneNumberField.getText();
     String Address = AddressField.getText();
     String Postcode = PostcodeField.getText();
-    if(respository.emailValdation(Email) ){
+    if(PatternMatching.emailValdation(Email) ){
        //creates it into an object get the right change customer id 
         Customer newCustomer = new Customer(CustomerID,FirstName,LastName,Email,PhoneNumber,Address,Postcode);
         respository.editCustomer(newCustomer);

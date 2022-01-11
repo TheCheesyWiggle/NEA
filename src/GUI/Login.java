@@ -5,7 +5,7 @@
  */
 package GUI;
 
-import static LibraryFunctions.respository.Hash;
+import static LibraryFunctions.Hashing.Hash;
 
 /**
  *
