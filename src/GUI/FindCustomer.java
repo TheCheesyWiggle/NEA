@@ -9,6 +9,7 @@ import LibraryFunctions.respository;
 import Objects.Customer;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import LibraryFunctions.MergeSort;
 
 /**
  *
@@ -168,6 +169,8 @@ public class FindCustomer extends javax.swing.JFrame {
 
     private void SearchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchBtnActionPerformed
         ArrayList<Customer> Customers = new ArrayList<Customer>(); 
+        //sorts arraylist alphabetically
+        Customers = MergeSort.mergeSortCustomers(Customers);
         //creates a list model to edit later
         DefaultListModel listModel = new DefaultListModel();
         //switch statement to check the serch condition
@@ -176,7 +179,7 @@ public class FindCustomer extends javax.swing.JFrame {
                 //Retrieves customerID from the search bar
                 int CustomerID = Integer.parseInt(SearchBar.getText());
                 //Fills the arraylist wih relevant customer objects
-                Customers = LibraryFunctions.respository.findCustomersID(CustomerID); 
+                Customers = respository.findCustomersID(CustomerID); 
                 //loops through the customers arraylist and adds the objects to the list models
                 for(Customer customer : Customers){
                     listModel.addElement(customer);
