@@ -5,6 +5,7 @@
  */
 package LibraryFunctions;
 
+
 import java.security.MessageDigest;
 import javax.xml.bind.DatatypeConverter;
 
@@ -25,5 +26,9 @@ public class Hashing {
             ex.printStackTrace();//prints error
         }
         return password;
+    }
+        
+    public static boolean CompareHashed(String databasePassword, String userEnteredPassword) {
+        return Hash(userEnteredPassword).equals(databasePassword);
     }
 }

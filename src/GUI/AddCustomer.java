@@ -239,12 +239,8 @@ public class AddCustomer extends javax.swing.JFrame {
         if(PatternMatching.emailValdation(Email) ){
            //creates it into an object get the right change customer id 
             Customer newCustomer = new Customer(0,FirstName,LastName,Email,PhoneNumber,Address,Postcode);
-            respository.editCustomer(newCustomer);
+            respository.AddCustomer(newCustomer);
 
-            //refreshes the page
-            EditCustomer editCust = new EditCustomer();
-            editCust.setVisible(true);
-            this.dispose();
         }
         else{
             InvalidEmail.setVisible(true);

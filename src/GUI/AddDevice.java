@@ -197,11 +197,9 @@ public class AddDevice extends javax.swing.JFrame {
     }//GEN-LAST:event_RefreshBtn3ActionPerformed
 
     private void FindCustomerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FindCustomerBtnActionPerformed
-        /*
         FindCustomer FindCust = new FindCustomer();
         FindCust.setVisible(true);
         this.dispose();
-        */
     }//GEN-LAST:event_FindCustomerBtnActionPerformed
 
     private void CustomerFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CustomerFieldActionPerformed

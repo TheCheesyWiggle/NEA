@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import LibraryFunctions.respository;
+import LibraryFunctions.MenuHelper;
 import Objects.Ticket;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
@@ -20,17 +22,10 @@ public class MainMenu extends javax.swing.JFrame {
      */
     public MainMenu() {
         initComponents();
-        ArrayList<Ticket> Tickets = LibraryFunctions.respository.findAllTickets(); 
-        //creates a list model to edit later
-        DefaultListModel listModel = new DefaultListModel();
-        //loops through the ticket arraylist and adds the objects to the list models
-        for(Ticket ticket : Tickets){
-            System.out.println(ticket.toString());
-            listModel.addElement(ticket);
-        }
-        //sets the list model
-        OpenTicketList.setModel(listModel);
-        ClosedTicketsList.setModel(listModel);
+        TechnicianNameLabel.setText(respository.getCurrentUser().getName());
+
+        OpenTicketList.setModel(MenuHelper.openTickets());
+        ClosedTicketsList.setModel(MenuHelper.recentlyClosedTickets());
 
     }
 
@@ -51,7 +46,7 @@ public class MainMenu extends javax.swing.JFrame {
         ClosedTickets = new javax.swing.JScrollPane();
         ClosedTicketsList = new javax.swing.JList<>();
         jLabel3 = new javax.swing.JLabel();
-        technicianName = new javax.swing.JLabel();
+        TechnicianNameLabel = new javax.swing.JLabel();
         openTicketBtn = new javax.swing.JButton();
         addCustomerBtn = new javax.swing.JButton();
         findTicketBtn = new javax.swing.JButton();
@@ -71,6 +66,11 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
+        OpenTicketList.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
         OpenTickets.setViewportView(OpenTicketList);
 
         jLabel1.setText("Open Tickets");
@@ -86,7 +86,7 @@ public class MainMenu extends javax.swing.JFrame {
 
         jLabel3.setText("Technician: ");
 
-        technicianName.setText("Technician Name");
+        TechnicianNameLabel.setText("Technician Name");
 
         openTicketBtn.setText("Open Ticket");
         openTicketBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -156,7 +156,7 @@ public class MainMenu extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
-                        .addComponent(technicianName))
+                        .addComponent(TechnicianNameLabel))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addComponent(jLabel1))
@@ -200,7 +200,7 @@ public class MainMenu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(technicianName)
+                    .addComponent(TechnicianNameLabel)
                     .addComponent(LogOffBtn))
                 .addGap(4, 4, 4)
                 .addComponent(jLabel1)
@@ -339,6 +339,7 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JButton LogOffBtn;
     private javax.swing.JList<String> OpenTicketList;
     private javax.swing.JScrollPane OpenTickets;
+    private javax.swing.JLabel TechnicianNameLabel;
     private javax.swing.JButton addCustomerBtn;
     private javax.swing.JButton addTechnicianBtn;
     private javax.swing.JButton findCustomerBtn;
@@ -347,6 +348,5 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JButton openTicketBtn;
-    private javax.swing.JLabel technicianName;
     // End of variables declaration//GEN-END:variables
 }

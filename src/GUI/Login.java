@@ -6,6 +6,8 @@
 package GUI;
 
 import static LibraryFunctions.Hashing.Hash;
+import LibraryFunctions.respository;
+import Objects.Technician;
 
 /**
  *
@@ -121,7 +123,7 @@ public class Login extends javax.swing.JFrame {
         String username = usernameField.getText();
         String password = Hash(passwordField.getText());
         //checks if the username and password are valid
-        if((username.equals("test"))&&(password.equals("9F86D081884C7D659A2FEAA0C55AD015A3BF4F1B2B0B822CD15D6C15B0F00A08"))){
+        if(respository.technicianLogIn(username, password)){
             //runs main menu window
             MainMenu main = new MainMenu();
             main.setVisible(true);
@@ -130,11 +132,9 @@ public class Login extends javax.swing.JFrame {
         }
         else{
             //makes invalid login label visible
-          ErrorMessage.setVisible(true);
+            ErrorMessage.setVisible(true);
         }
         
-        //search database for the username 
-        //check if the password matches
         //if either comes back with nothing or a different passwordn make if statement false
     }//GEN-LAST:event_LoginBtnActionPerformed
 

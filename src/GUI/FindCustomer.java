@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import LibraryFunctions.respository;
 import Objects.Customer;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
@@ -20,6 +21,7 @@ public class FindCustomer extends javax.swing.JFrame {
     
     public FindCustomer() {
         initComponents();
+        TechnicianNameLabel.setText(respository.getCurrentUser().getName());
     }
 
     /**
@@ -34,7 +36,7 @@ public class FindCustomer extends javax.swing.JFrame {
         SearchCondition = new javax.swing.JComboBox<>();
         SearchBar = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        TechnicianNameField = new javax.swing.JLabel();
+        TechnicianNameLabel = new javax.swing.JLabel();
         Results = new javax.swing.JScrollPane();
         ResultsList = new javax.swing.JList<>();
         MainMenuBtn = new javax.swing.JToggleButton();
@@ -53,7 +55,7 @@ public class FindCustomer extends javax.swing.JFrame {
 
         jLabel1.setText("Techincian:");
 
-        TechnicianNameField.setText("Technician Name");
+        TechnicianNameLabel.setText("Technician Name");
 
         ResultsList.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -98,7 +100,7 @@ public class FindCustomer extends javax.swing.JFrame {
                                 .addContainerGap()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(TechnicianNameField))
+                                .addComponent(TechnicianNameLabel))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(54, 54, 54)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,7 +127,7 @@ public class FindCustomer extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(TechnicianNameField))
+                    .addComponent(TechnicianNameLabel))
                 .addGap(23, 23, 23)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -268,7 +270,7 @@ public class FindCustomer extends javax.swing.JFrame {
     private javax.swing.JTextField SearchBar;
     private javax.swing.JButton SearchBtn;
     private javax.swing.JComboBox<String> SearchCondition;
-    private javax.swing.JLabel TechnicianNameField;
+    private javax.swing.JLabel TechnicianNameLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables

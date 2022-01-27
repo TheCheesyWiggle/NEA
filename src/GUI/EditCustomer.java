@@ -23,6 +23,7 @@ public class EditCustomer extends javax.swing.JFrame {
         initComponents();
         InvalidEmail.setVisible(false);
         InvalidPhonenumber.setVisible(false);
+        TechnicianNameLabel.setText(respository.getCurrentUser().getName());
     }
 
     /**

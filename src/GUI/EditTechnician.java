@@ -19,6 +19,7 @@ public class EditTechnician extends javax.swing.JFrame {
      */
     public EditTechnician() {
         initComponents();
+        TechnicianNameLabel.setText(respository.getCurrentUser().getName());
     }
 
     /**

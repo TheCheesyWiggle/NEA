@@ -31,7 +31,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="TechnicianNameField1" min="-2" max="-2" attributes="0"/>
+                              <Component id="TechnicianNameLabel" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
@@ -69,7 +69,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="TechnicianNameField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="TechnicianNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
@@ -118,7 +118,7 @@
         <Property name="text" type="java.lang.String" value="Techincian:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JLabel" name="TechnicianNameField1">
+    <Component class="javax.swing.JLabel" name="TechnicianNameLabel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Technician Name"/>
       </Properties>

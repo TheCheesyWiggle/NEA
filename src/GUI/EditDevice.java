@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import LibraryFunctions.respository;
+
 /**
  *
  * @author fv200399
@@ -16,6 +18,7 @@ public class EditDevice extends javax.swing.JFrame {
      */
     public EditDevice() {
         initComponents();
+        TechnicianNameLabel.setText(respository.getCurrentUser().getName());
     }
 
     /**
