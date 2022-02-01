@@ -21,6 +21,7 @@ public class AddNotes extends javax.swing.JFrame {
     public AddNotes() {
         initComponents();
         TechnicianNameLabel.setText(respository.getCurrentUser().getName());
+        ErrorMessage.setVisible(false);
     }
 
     /**

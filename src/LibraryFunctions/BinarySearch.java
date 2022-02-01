@@ -19,7 +19,6 @@ public class BinarySearch {
         //loops until the end pointer is less than the start
         while(start<=end){
             //checks if the middle customer has and id bigger or smaller than the target id
-            System.out.println(CustomerList.get(mid));
             if(CustomerList.get(mid).getID()<CustID){
                 //readjusts the start pointer
                 start = mid +1;

@@ -23,6 +23,7 @@ public class FindNotes extends javax.swing.JFrame {
     public FindNotes() {
         initComponents();
         TechnicianNameLabel.setText(respository.getCurrentUser().getName());
+        ErrorMessage.setVisible(false);
     }
 
     /**

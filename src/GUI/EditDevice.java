@@ -19,6 +19,7 @@ public class EditDevice extends javax.swing.JFrame {
     public EditDevice() {
         initComponents();
         TechnicianNameLabel.setText(respository.getCurrentUser().getName());
+        ErrorMessage.setVisible(false);
     }
 
     /**

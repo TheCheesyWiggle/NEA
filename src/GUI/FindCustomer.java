@@ -24,6 +24,7 @@ public class FindCustomer extends javax.swing.JFrame {
     public FindCustomer() {
         initComponents();
         TechnicianNameLabel.setText(respository.getCurrentUser().getName());
+        ErrorMessage.setVisible(false);
     }
 
     /**

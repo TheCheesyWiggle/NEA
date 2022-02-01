@@ -22,6 +22,7 @@ public class FindDevice extends javax.swing.JFrame {
     public FindDevice() {
         initComponents();
         TechnicianNameLabel.setText(respository.getCurrentUser().getName());
+        ErrorMessage.setVisible(false);
     }
 
     /**

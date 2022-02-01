@@ -21,6 +21,7 @@ public class AddTechnician extends javax.swing.JFrame {
     public AddTechnician() {
         initComponents();
         TechnicianNameLabel.setText(respository.getCurrentUser().getName());
+        ErrorMessage.setVisible(false);
     }
 
     /**

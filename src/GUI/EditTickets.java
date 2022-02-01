@@ -22,6 +22,7 @@ public class EditTickets extends javax.swing.JFrame {
     public EditTickets() {
         initComponents();
         TechnicianNameLabel.setText(respository.getCurrentUser().getName());
+        ErrorMessage.setVisible(false);
     }
 
     /**

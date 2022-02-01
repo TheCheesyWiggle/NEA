@@ -23,6 +23,7 @@ public class FindTicket extends javax.swing.JFrame {
     public FindTicket() {
         initComponents();
         TechnicianNameLabel.setText(respository.getCurrentUser().getName());
+        ErrorMessage.setVisible(false);
     }
 
     /**

@@ -20,6 +20,7 @@ public class AddDevice extends javax.swing.JFrame {
      */
     public AddDevice() {
         initComponents();
+        ErrorMessage.setVisible(false);
     }
 
     /**
