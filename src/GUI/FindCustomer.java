@@ -190,7 +190,8 @@ public class FindCustomer extends javax.swing.JFrame {
                 //completes a mergesort on all the customers in the database
                 Customers = MergeSort.mergeSortCustomers(respository.findAllCustomers()); 
                 //performs binary search on the sorted list
-                Customer cust = BinarySearch.Customer(Customers , CustomerID);
+                Customer cust = BinarySearch.Customer(Customers, CustomerID);
+                System.out.println(cust.toString());
                 //adds customer to the list model
                 listModel.addElement(cust);
                 //sets the list model

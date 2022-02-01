@@ -58,7 +58,7 @@ public class MergeSort {
             //checks wether both arraylists are at the end of the list
             if((IndexL < left.size())&&(IndexR < right.size())){
                 //checks which name is alphabetically first
-                if(left.get(IndexL).getFirst_Name().compareTo(right.get(IndexR).getFirst_Name())>0){
+                if(left.get(IndexL).getID()>(right.get(IndexR).getID())){
                     //adds the right lists value
                     mergedList.add(right.get(IndexR));
                     //adds 1 to both the right and merged index pointers
