@@ -21,8 +21,7 @@ public class EditCustomer extends javax.swing.JFrame {
      */
     public EditCustomer() {
         initComponents();
-        InvalidEmail.setVisible(false);
-        InvalidPhonenumber.setVisible(false);
+        ErrorMessage.setVisible(false);
         TechnicianNameLabel.setText(respository.getCurrentUser().getName());
     }
 
@@ -55,8 +54,7 @@ public class EditCustomer extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         CustomerIDField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        InvalidEmail = new javax.swing.JLabel();
-        InvalidPhonenumber = new javax.swing.JLabel();
+        ErrorMessage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -114,13 +112,9 @@ public class EditCustomer extends javax.swing.JFrame {
 
         jLabel2.setText("Customer ID:");
 
-        InvalidEmail.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        InvalidEmail.setForeground(new java.awt.Color(255, 0, 0));
-        InvalidEmail.setText("Invalid Email");
-
-        InvalidPhonenumber.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        InvalidPhonenumber.setForeground(new java.awt.Color(255, 0, 0));
-        InvalidPhonenumber.setText("Invalid PhoneNumber");
+        ErrorMessage.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        ErrorMessage.setForeground(new java.awt.Color(255, 0, 0));
+        ErrorMessage.setText("Error Parameter invalid");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -160,14 +154,11 @@ public class EditCustomer extends javax.swing.JFrame {
                                 .addComponent(EmailField)
                                 .addComponent(PhoneNumberField)
                                 .addComponent(AddressField)
-                                .addComponent(PostcodeField, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(PostcodeField, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(108, 108, 108)
+                        .addComponent(ErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(75, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(61, 61, 61)
-                .addComponent(InvalidEmail)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(InvalidPhonenumber)
-                .addGap(72, 72, 72))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,11 +169,9 @@ public class EditCustomer extends javax.swing.JFrame {
                     .addComponent(TechnicianNameLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(jLabel9)
-                .addGap(5, 5, 5)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(InvalidEmail)
-                    .addComponent(InvalidPhonenumber))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
+                .addComponent(ErrorMessage)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CustomerIDField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
@@ -252,7 +241,7 @@ public class EditCustomer extends javax.swing.JFrame {
         this.dispose();
     }
     else{
-        InvalidEmail.setVisible(true);
+        ErrorMessage.setVisible(true);
     }
 
         //Adds to local customer arraylist since it will probably been used again soon
@@ -310,9 +299,8 @@ public class EditCustomer extends javax.swing.JFrame {
     private javax.swing.JTextField AddressField;
     private javax.swing.JTextField CustomerIDField;
     private javax.swing.JTextField EmailField;
+    private javax.swing.JLabel ErrorMessage;
     private javax.swing.JTextField FirstNameField;
-    private javax.swing.JLabel InvalidEmail;
-    private javax.swing.JLabel InvalidPhonenumber;
     private javax.swing.JTextField LastNameField;
     private javax.swing.JToggleButton MainMenuBtn;
     private javax.swing.JTextField PhoneNumberField;

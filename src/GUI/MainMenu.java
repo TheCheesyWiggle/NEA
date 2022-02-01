@@ -23,7 +23,7 @@ public class MainMenu extends javax.swing.JFrame {
     public MainMenu() {
         initComponents();
         TechnicianNameLabel.setText(respository.getCurrentUser().getName());
-
+        AdminMessage.setVisible(false);
         OpenTicketList.setModel(MenuHelper.openTickets());
         ClosedTicketsList.setModel(MenuHelper.recentlyClosedTickets());
 
@@ -56,6 +56,12 @@ public class MainMenu extends javax.swing.JFrame {
         AddNoteBtn = new javax.swing.JButton();
         FindDeviceBtn = new javax.swing.JButton();
         FindNotesBtn = new javax.swing.JButton();
+        AdminMessage = new javax.swing.JLabel();
+        EditCustomerBtn = new javax.swing.JButton();
+        EditTicketBtn = new javax.swing.JButton();
+        EditDeviceBtn = new javax.swing.JButton();
+        EditNotesBtn = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -145,6 +151,50 @@ public class MainMenu extends javax.swing.JFrame {
         });
 
         FindNotesBtn.setText("Find Notes");
+        FindNotesBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FindNotesBtnActionPerformed(evt);
+            }
+        });
+
+        AdminMessage.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        AdminMessage.setForeground(new java.awt.Color(255, 0, 0));
+        AdminMessage.setText("Must have admin privelleges");
+
+        EditCustomerBtn.setText("EditCustomer");
+        EditCustomerBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditCustomerBtnActionPerformed(evt);
+            }
+        });
+
+        EditTicketBtn.setText("Edit Ticket");
+        EditTicketBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditTicketBtnActionPerformed(evt);
+            }
+        });
+
+        EditDeviceBtn.setText("Edit Device");
+        EditDeviceBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditDeviceBtnActionPerformed(evt);
+            }
+        });
+
+        EditNotesBtn.setText("Edit Notes");
+        EditNotesBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditNotesBtnActionPerformed(evt);
+            }
+        });
+
+        jButton6.setText("Edit Technician");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -170,29 +220,38 @@ public class MainMenu extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(ClosedTickets, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(LogOffBtn)
-                        .addGap(30, 30, 30))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(AdminMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(addTechnicianBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(openTicketBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
                             .addComponent(addCustomerBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
                             .addComponent(AddDeviceBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(AddNoteBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 130, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(FindDeviceBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
-                                .addComponent(FindNotesBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(findCustomerBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(findTicketBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(42, 42, 42))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(addTechnicianBtn)
-                .addGap(168, 168, 168))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(64, 148, Short.MAX_VALUE)
+                                .addComponent(LogOffBtn)
+                                .addContainerGap(84, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(FindDeviceBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(findTicketBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(findCustomerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(FindNotesBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(EditNotesBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(EditDeviceBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(EditTicketBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(EditCustomerBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(38, 38, 38))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,36 +262,42 @@ public class MainMenu extends javax.swing.JFrame {
                     .addComponent(TechnicianNameLabel)
                     .addComponent(LogOffBtn))
                 .addGap(4, 4, 4)
-                .addComponent(jLabel1)
-                .addGap(14, 14, 14)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(OpenTickets, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(jLabel2))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(addCustomerBtn)
-                            .addComponent(findTicketBtn))
-                        .addGap(5, 5, 5)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(findCustomerBtn)
-                            .addComponent(openTicketBtn))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(AddDeviceBtn)
-                            .addComponent(FindDeviceBtn))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1)
+                        .addGap(14, 14, 14)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(AddNoteBtn)
-                                .addGap(22, 22, 22))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(FindNotesBtn)
-                                .addGap(18, 18, 18)))
-                        .addComponent(addTechnicianBtn)))
-                .addGap(4, 4, 4)
-                .addComponent(ClosedTickets, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(OpenTickets, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(29, 29, 29)
+                                .addComponent(jLabel2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(addCustomerBtn)
+                                    .addComponent(EditCustomerBtn)
+                                    .addComponent(findCustomerBtn))
+                                .addGap(5, 5, 5)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(openTicketBtn)
+                                    .addComponent(EditTicketBtn)
+                                    .addComponent(findTicketBtn))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(AddDeviceBtn)
+                                    .addComponent(FindDeviceBtn)
+                                    .addComponent(EditDeviceBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(AddNoteBtn)
+                                    .addComponent(EditNotesBtn)
+                                    .addComponent(FindNotesBtn))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(addTechnicianBtn)
+                                    .addComponent(jButton6))))
+                        .addGap(4, 4, 4)
+                        .addComponent(ClosedTickets, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(AdminMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(53, Short.MAX_VALUE))
         );
 
@@ -252,9 +317,14 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_findTicketBtnActionPerformed
 
     private void addTechnicianBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTechnicianBtnActionPerformed
+    if(respository.getCurrentUser().isAdmin()){
         AddTechnician addTech = new AddTechnician();
         addTech.setVisible(true);
         this.dispose();
+    }
+    else{
+        AdminMessage.setVisible(true);
+    }
     }//GEN-LAST:event_addTechnicianBtnActionPerformed
 
     private void addCustomerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCustomerBtnActionPerformed
@@ -292,6 +362,47 @@ public class MainMenu extends javax.swing.JFrame {
         addDev.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_AddDeviceBtnActionPerformed
+
+    private void FindNotesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FindNotesBtnActionPerformed
+        FindNotes FindNotes = new FindNotes();
+        FindNotes.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_FindNotesBtnActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    if(respository.getCurrentUser().isAdmin()){
+        EditTechnician EditTech = new EditTechnician();
+        EditTech.setVisible(true);
+        this.dispose();
+    }
+    else{
+        AdminMessage.setVisible(true);
+    }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void EditCustomerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditCustomerBtnActionPerformed
+        EditCustomer EditCust = new EditCustomer();
+        EditCust.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_EditCustomerBtnActionPerformed
+
+    private void EditTicketBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditTicketBtnActionPerformed
+        EditTickets EditTicket = new EditTickets();
+        EditTicket.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_EditTicketBtnActionPerformed
+
+    private void EditDeviceBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditDeviceBtnActionPerformed
+        EditDevice EditDevice = new EditDevice();
+        EditDevice.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_EditDeviceBtnActionPerformed
+
+    private void EditNotesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditNotesBtnActionPerformed
+        EditNotes EditNotes = new EditNotes();
+        EditNotes.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_EditNotesBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -332,8 +443,13 @@ public class MainMenu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddDeviceBtn;
     private javax.swing.JButton AddNoteBtn;
+    private javax.swing.JLabel AdminMessage;
     private javax.swing.JScrollPane ClosedTickets;
     private javax.swing.JList<String> ClosedTicketsList;
+    private javax.swing.JButton EditCustomerBtn;
+    private javax.swing.JButton EditDeviceBtn;
+    private javax.swing.JButton EditNotesBtn;
+    private javax.swing.JButton EditTicketBtn;
     private javax.swing.JButton FindDeviceBtn;
     private javax.swing.JButton FindNotesBtn;
     private javax.swing.JButton LogOffBtn;
@@ -344,6 +460,7 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JButton addTechnicianBtn;
     private javax.swing.JButton findCustomerBtn;
     private javax.swing.JButton findTicketBtn;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -110,21 +110,22 @@ public class MergeSort {
                 left.add(TicketList.get(i));
             }
             //adds objest to the right list
-            for(int i = middle;i<TicketList.size();i++){
+            for(int j = middle;j<TicketList.size();j++){
                 //adds object to the left list
-                right.add(TicketList.get(i));
+                right.add(TicketList.get(j));
             }
         }
         else{
             //returns arraylist when there is only on object
             return TicketList;
         }
-        //recurses through the list
+        //recurses through the left and right lists
         mergeSortTickets(left);
         mergeSortTickets(right);
         //merges the all the lists and returns a sorted list
         return mergeTickets(left,right);
     }
+    
     public static ArrayList<Ticket> mergeTickets(ArrayList<Ticket> left, ArrayList<Ticket> right){
         //initialize empty list
         ArrayList<Ticket> mergedList = new ArrayList<>();
@@ -138,7 +139,7 @@ public class MergeSort {
             //checks wether both arraylists are at the end of the list
             if((IndexL < left.size())&&(IndexR < right.size())){
                 //checks which name is alphabetically first
-                if(left.get(IndexL).getPriority()>=right.get(IndexR).getPriority()){
+                if(left.get(IndexL).getPriority()<= right.get(IndexR).getPriority()){
                     //adds the right lists value
                     mergedList.add(right.get(IndexR));
                     //adds 1 to both the right and merged index pointers

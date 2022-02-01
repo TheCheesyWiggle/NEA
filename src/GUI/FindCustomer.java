@@ -10,6 +10,7 @@ import Objects.Customer;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import LibraryFunctions.MergeSort;
+import LibraryFunctions.BinarySearch;
 
 /**
  *
@@ -38,12 +39,13 @@ public class FindCustomer extends javax.swing.JFrame {
         SearchBar = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         TechnicianNameLabel = new javax.swing.JLabel();
-        Results = new javax.swing.JScrollPane();
-        ResultsList = new javax.swing.JList<>();
         MainMenuBtn = new javax.swing.JToggleButton();
         EditCustomerBtn = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         SearchBtn = new javax.swing.JButton();
+        ErrorMessage = new javax.swing.JLabel();
+        Results = new javax.swing.JScrollPane();
+        ResultsList = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,13 +59,6 @@ public class FindCustomer extends javax.swing.JFrame {
         jLabel1.setText("Techincian:");
 
         TechnicianNameLabel.setText("Technician Name");
-
-        ResultsList.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ResultsListMouseClicked(evt);
-            }
-        });
-        Results.setViewportView(ResultsList);
 
         MainMenuBtn.setText("Return to Main Menu");
         MainMenuBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -89,6 +84,17 @@ public class FindCustomer extends javax.swing.JFrame {
             }
         });
 
+        ErrorMessage.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        ErrorMessage.setForeground(new java.awt.Color(255, 0, 0));
+        ErrorMessage.setText("Error Parameter invalid");
+
+        ResultsList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ResultsListMouseClicked(evt);
+            }
+        });
+        Results.setViewportView(ResultsList);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -96,30 +102,31 @@ public class FindCustomer extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(TechnicianNameLabel))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(54, 54, 54)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(SearchBar)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(SearchCondition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(Results, javax.swing.GroupLayout.PREFERRED_SIZE, 515, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 9, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TechnicianNameLabel)
+                        .addGap(0, 424, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(EditCustomerBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(SearchBtn)
                         .addGap(118, 118, 118)
-                        .addComponent(MainMenuBtn)))
+                        .addComponent(MainMenuBtn))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Results, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(SearchBar, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(SearchCondition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -129,15 +136,17 @@ public class FindCustomer extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(TechnicianNameLabel))
-                .addGap(23, 23, 23)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ErrorMessage)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SearchBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(SearchCondition, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Results, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(Results, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(MainMenuBtn)
                     .addComponent(EditCustomerBtn)
@@ -178,12 +187,12 @@ public class FindCustomer extends javax.swing.JFrame {
             case 0:
                 //Retrieves customerID from the search bar
                 int CustomerID = Integer.parseInt(SearchBar.getText());
-                //Fills the arraylist wih relevant customer objects
-                Customers = respository.findCustomersID(CustomerID); 
-                //loops through the customers arraylist and adds the objects to the list models
-                for(Customer customer : Customers){
-                    listModel.addElement(customer);
-                }
+                //completes a mergesort on all the customers in the database
+                Customers = MergeSort.mergeSortCustomers(respository.findAllCustomers()); 
+                //performs binary search on the sorted list
+                Customer cust = BinarySearch.Customer(Customers , CustomerID);
+                //adds customer to the list model
+                listModel.addElement(cust);
                 //sets the list model
                 ResultsList.setModel(listModel);
                 break;
@@ -267,6 +276,7 @@ public class FindCustomer extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton EditCustomerBtn;
+    private javax.swing.JLabel ErrorMessage;
     private javax.swing.JToggleButton MainMenuBtn;
     private javax.swing.JScrollPane Results;
     private javax.swing.JList<String> ResultsList;
