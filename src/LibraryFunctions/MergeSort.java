@@ -136,9 +136,9 @@ public class MergeSort {
         
         //checks whether the pointers are at the end of the list
         while((IndexL < left.size())||(IndexR < right.size())){
-            //checks wether both arraylists are at the end of the list
+            //checks whether both arraylists are at the end of the list
             if((IndexL < left.size())&&(IndexR < right.size())){
-                //checks which name is alphabetically first
+                //checks which ticket has higher priority
                 if(left.get(IndexL).getPriority()<= right.get(IndexR).getPriority()){
                     //adds the right lists value
                     mergedList.add(right.get(IndexR));

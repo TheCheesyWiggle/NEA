@@ -233,16 +233,17 @@ public class AddCustomer extends javax.swing.JFrame {
         String Postcode = PostcodeField.getText();
         
         if(PatternMatching.emailValdation(Email) && PatternMatching.phoneNumberValdation(PhoneNumber)){
-           //creates it into an object get the right change customer id 
-            Customer newCustomer = new Customer(0,FirstName,LastName,Email,PhoneNumber,Address,Postcode);
-            //adds customer to database
-            respository.AddCustomer(newCustomer);
+       //creates it into an object get the right change customer id 
+        Customer newCustomer = new Customer(0,FirstName,LastName,Email,PhoneNumber,Address,Postcode);
+        //adds customer to database
+        respository.AddCustomer(newCustomer);
 
         }
         else{
             ErrorMessage.setText("Error Invalid Email or Phonenumber");
             ErrorMessage.setVisible(true);
         }
+        
         //creates it into an object (For customerID 0 is a place holder as the database automatically fills it in)
         Customer newCustomer = new Customer(0,FirstName,LastName,Email,PhoneNumber,Address,Postcode);
         respository.AddCustomer(newCustomer);
