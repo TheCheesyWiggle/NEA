@@ -187,7 +187,15 @@ public class AddDevice extends javax.swing.JFrame {
         int CustomerID = Integer.parseInt(CustomerField.getText());
         String Model = ModelField.getText();
         String Manufacturer = ManufacturerField.getText();
-        
+        //sets up array to loop through
+        String array[] = {CustomerField.getText(), ModelField.getText(), ManufacturerField.getText()};
+        //check if all the fields are filled in
+        for (int i = 0;i<array.length;i++){
+            if(array[i].equals("")){
+                ErrorMessage.setText("Fill in all Fields");
+                ErrorMessage.setVisible(true);
+            }
+        }
         //take all the values and creates an object
         Device newDevice = new Device(0,Model,Manufacturer,CustomerID);
         respository.AddDevice(newDevice);

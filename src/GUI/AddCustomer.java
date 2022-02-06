@@ -52,6 +52,7 @@ public class AddCustomer extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         RefreshBtn = new javax.swing.JButton();
         ErrorMessage = new javax.swing.JLabel();
+        FieldMessage = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -128,6 +129,10 @@ public class AddCustomer extends javax.swing.JFrame {
         ErrorMessage.setForeground(new java.awt.Color(255, 0, 0));
         ErrorMessage.setText("Error Parameter invalid");
 
+        FieldMessage.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        FieldMessage.setForeground(new java.awt.Color(255, 0, 0));
+        FieldMessage.setText("Fields");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -138,12 +143,12 @@ public class AddCustomer extends javax.swing.JFrame {
                         .addGap(20, 20, 20)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(71, 71, 71)
-                                .addComponent(jLabel9))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(TechnicianNameLabel))))
+                                .addComponent(TechnicianNameLabel))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(71, 71, 71)
+                                .addComponent(jLabel9))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(SaveBtn)
@@ -154,23 +159,24 @@ public class AddCustomer extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8))
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(FirstNameField)
-                            .addComponent(LastNameField)
-                            .addComponent(EmailField)
-                            .addComponent(PhoneNumberField)
-                            .addComponent(AddressField)
-                            .addComponent(PostcodeField, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(104, 104, 104)
-                        .addComponent(ErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel3))
+                                .addGap(28, 28, 28)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(FirstNameField)
+                                    .addComponent(LastNameField)
+                                    .addComponent(EmailField)
+                                    .addComponent(PhoneNumberField)
+                                    .addComponent(AddressField)
+                                    .addComponent(PostcodeField, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(ErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(FieldMessage))))
                 .addContainerGap(54, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -182,9 +188,11 @@ public class AddCustomer extends javax.swing.JFrame {
                     .addComponent(TechnicianNameLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel9)
-                .addGap(27, 27, 27)
+                .addGap(26, 26, 26)
                 .addComponent(ErrorMessage)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(FieldMessage)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(FirstNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -231,27 +239,27 @@ public class AddCustomer extends javax.swing.JFrame {
         String PhoneNumber = PhoneNumberField.getText();
         String Address = AddressField.getText();
         String Postcode = PostcodeField.getText();
-        
+        //sets up array to loop through
+        String array[] = {FirstName, LastName, Email, PhoneNumber, Address, Postcode};
+        //check if all the fields are filled in
+        for (int i = 0;i<array.length;i++){
+            if(array[i].equals("")){
+                FieldMessage.setText("Fill in all Fields");
+                FieldMessage.setVisible(true);
+            }
+        }
+        //check phone number and email values
         if(PatternMatching.emailValdation(Email) && PatternMatching.phoneNumberValdation(PhoneNumber)){
-       //creates it into an object get the right change customer id 
-        Customer newCustomer = new Customer(0,FirstName,LastName,Email,PhoneNumber,Address,Postcode);
-        //adds customer to database
-        respository.AddCustomer(newCustomer);
-
+            //creates it into an object get the right change customer id 
+            Customer newCustomer = new Customer(0,FirstName,LastName,Email,PhoneNumber,Address,Postcode);
+            //adds customer to database
+            respository.AddCustomer(newCustomer);
         }
         else{
             ErrorMessage.setText("Error Invalid Email or Phonenumber");
             ErrorMessage.setVisible(true);
         }
-        
-        //creates it into an object (For customerID 0 is a place holder as the database automatically fills it in)
-        Customer newCustomer = new Customer(0,FirstName,LastName,Email,PhoneNumber,Address,Postcode);
-        respository.AddCustomer(newCustomer);
-        
-        //refreshes the page
-        AddCustomer addCust = new AddCustomer();
-        addCust.setVisible(true);
-        this.dispose();
+
         /*
         verify if the email is a valid
         Adds to local customer arraylist since it will probably been used again soon
@@ -311,6 +319,7 @@ public class AddCustomer extends javax.swing.JFrame {
     private javax.swing.JTextField AddressField;
     private javax.swing.JTextField EmailField;
     private javax.swing.JLabel ErrorMessage;
+    private javax.swing.JLabel FieldMessage;
     private javax.swing.JTextField FirstNameField;
     private javax.swing.JTextField LastNameField;
     private javax.swing.JToggleButton MainMenuBtn;
