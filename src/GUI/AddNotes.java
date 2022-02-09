@@ -9,6 +9,7 @@ package GUI;
 import Objects.Note;
 import Objects.Technician;
 import LibraryFunctions.respository;
+import Objects.Ticket;
 /**
  *
  * @author fv200399
@@ -22,6 +23,9 @@ public class AddNotes extends javax.swing.JFrame {
         initComponents();
         TechnicianNameLabel.setText(respository.getCurrentUser().getName());
         ErrorMessage.setVisible(false);
+        FieldMessage.setVisible(false);
+        SucessfulSave.setVisible(false);
+        
     }
 
     /**
@@ -46,6 +50,8 @@ public class AddNotes extends javax.swing.JFrame {
         RefreshBtn = new javax.swing.JButton();
         TicketIDField = new javax.swing.JTextField();
         ErrorMessage = new javax.swing.JLabel();
+        FieldMessage = new javax.swing.JLabel();
+        SucessfulSave = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,6 +95,14 @@ public class AddNotes extends javax.swing.JFrame {
         ErrorMessage.setForeground(new java.awt.Color(255, 0, 0));
         ErrorMessage.setText("Error Parameter invalid");
 
+        FieldMessage.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        FieldMessage.setForeground(new java.awt.Color(255, 0, 0));
+        FieldMessage.setText("Fields");
+
+        SucessfulSave.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        SucessfulSave.setForeground(new java.awt.Color(0, 153, 0));
+        SucessfulSave.setText("SUCESS");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -124,16 +138,26 @@ public class AddNotes extends javax.swing.JFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(74, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(TechnicianNameLabel)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(TechnicianNameLabel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(154, 154, 154)
+                        .addComponent(FieldMessage)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(155, 155, 155)
                     .addComponent(ErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(155, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(214, 214, 214)
+                    .addComponent(SucessfulSave)
+                    .addContainerGap(214, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,7 +168,9 @@ public class AddNotes extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(FieldMessage)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
@@ -168,6 +194,11 @@ public class AddNotes extends javax.swing.JFrame {
                     .addGap(93, 93, 93)
                     .addComponent(ErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(280, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(72, 72, 72)
+                    .addComponent(SucessfulSave)
+                    .addContainerGap(316, Short.MAX_VALUE)))
         );
 
         pack();
@@ -183,15 +214,30 @@ public class AddNotes extends javax.swing.JFrame {
         //Grabs all the values inputted by the User
         String Content = ContentField.getText();
         int TicketID = Integer.parseInt(TicketIDField.getText());
-
-        //creates it into an object (For noteID 0 is a place holder as the database automatically fills it in)
-        Note newNote = new Note(0,Content,TicketID,1/* get the current technicains id automatically*/);
-        LibraryFunctions.respository.AddNotes(newNote);
-
-        //refreshes the page
-        AddNotes addnotes = new AddNotes();
-        addnotes.setVisible(true);
-        this.dispose();
+        
+        String array[] = {ContentField.getText(), TicketIDField.getText()};
+        //sets up counter to count filled in fields
+        int counter = 0;
+        //check if all the fields are filled in
+        for (int i = 0;i<array.length;i++){
+            if(array[i].equals("")){
+                FieldMessage.setText("Fill in all Fields please");
+                FieldMessage.setVisible(true);
+            }
+            else{
+                counter++;
+            }
+        }
+        if(counter==2){
+            //creates it into an object (For noteID 0 is a place holder as the database automatically fills it in)
+            Note newNote = new Note(0,Content,TicketID,1/* get the current technicains id automatically*/);
+            LibraryFunctions.respository.AddNotes(newNote);   
+            SucessfulSave.setText("Sucessful Save!");
+            SucessfulSave.setVisible(true);
+        }
+        else{
+            FieldMessage.setVisible(true);
+        }
     }//GEN-LAST:event_SaveBtnActionPerformed
 
     private void RefreshBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshBtnActionPerformed
@@ -238,9 +284,11 @@ public class AddNotes extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea ContentField;
     private javax.swing.JLabel ErrorMessage;
+    private javax.swing.JLabel FieldMessage;
     private javax.swing.JButton MainMenuBtn;
     private javax.swing.JButton RefreshBtn;
     private javax.swing.JButton SaveBtn;
+    private javax.swing.JLabel SucessfulSave;
     private javax.swing.JLabel TechnicianNameLabel;
     private javax.swing.JTextField TicketIDField;
     private javax.swing.JLabel jLabel1;

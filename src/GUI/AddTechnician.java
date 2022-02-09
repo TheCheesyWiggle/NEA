@@ -22,6 +22,7 @@ public class AddTechnician extends javax.swing.JFrame {
         initComponents();
         TechnicianNameLabel.setText(respository.getCurrentUser().getName());
         ErrorMessage.setVisible(false);
+        SucessfulSave.setVisible(false);
     }
 
     /**
@@ -48,6 +49,8 @@ public class AddTechnician extends javax.swing.JFrame {
         AdminCheckBox = new javax.swing.JCheckBox();
         jLabel6 = new javax.swing.JLabel();
         ErrorMessage = new javax.swing.JLabel();
+        FieldMessage = new javax.swing.JLabel();
+        SucessfulSave = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -99,6 +102,14 @@ public class AddTechnician extends javax.swing.JFrame {
         ErrorMessage.setForeground(new java.awt.Color(255, 0, 0));
         ErrorMessage.setText("Error Parameter invalid");
 
+        FieldMessage.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        FieldMessage.setForeground(new java.awt.Color(255, 0, 0));
+        FieldMessage.setText("Fields");
+
+        SucessfulSave.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        SucessfulSave.setForeground(new java.awt.Color(0, 153, 0));
+        SucessfulSave.setText("SUCESS");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -120,7 +131,13 @@ public class AddTechnician extends javax.swing.JFrame {
                         .addComponent(MainMenuBtn))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(83, 83, 83)
-                        .addComponent(ErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(ErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(FieldMessage)
+                                .addGap(18, 18, 18)
+                                .addComponent(SucessfulSave)))))
                 .addContainerGap(59, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(54, 54, 54)
@@ -132,13 +149,11 @@ public class AddTechnician extends javax.swing.JFrame {
                             .addComponent(jLabel5)
                             .addComponent(jLabel2))
                         .addGap(37, 37, 37)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(NameField)
-                                .addComponent(PasswordField)
-                                .addComponent(UsernameField, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(AdminCheckBox)))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(NameField)
+                            .addComponent(PasswordField)
+                            .addComponent(UsernameField, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AdminCheckBox))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -148,11 +163,15 @@ public class AddTechnician extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(TechnicianNameLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(FieldMessage)
+                    .addComponent(SucessfulSave))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(ErrorMessage)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(UsernameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -203,14 +222,30 @@ public class AddTechnician extends javax.swing.JFrame {
         String Email = UsernameField.getText()+"@CompanyDomain.co.uk"; //autogen;
         boolean Admin = AdminCheckBox.isSelected();
         
-        //creates it into an object (For customerID 0 is a place holder as the database automatically fills it in)
-        Technician newTechnician = new Technician(0,Name,Username,Password,Email,Admin);
-        respository.AddTechnician(newTechnician);
+        String array[] = {Name, Username, Password, Email, new Boolean(Admin).toString()};
+        //sets up counter to count filled in fields
+        int counter = 0;
+        //check if all the fields are filled in
+        for (int i = 0;i<array.length;i++){
+            if(array[i].equals("")){
+                FieldMessage.setText("Fill in all Fields please");
+                FieldMessage.setVisible(true);
+            }
+            else{
+                counter++;
+            }
+        }
+        if(counter==5){
+            //creates it into an object (For customerID 0 is a place holder as the database automatically fills it in)
+            Technician newTechnician = new Technician(0,Name,Username,Password,Email,Admin);
+            respository.AddTechnician(newTechnician);    
+            SucessfulSave.setText("Sucessful Save!");
+            SucessfulSave.setVisible(true);
+        }
+        else{
+            FieldMessage.setVisible(true);
+        }
         
-        //refreshes the page
-        AddTechnician addTech = new AddTechnician();
-        addTech.setVisible(true);
-        this.dispose();
     }//GEN-LAST:event_SaveBtnActionPerformed
 
     /**
@@ -252,11 +287,13 @@ public class AddTechnician extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox AdminCheckBox;
     private javax.swing.JLabel ErrorMessage;
+    private javax.swing.JLabel FieldMessage;
     private javax.swing.JButton MainMenuBtn;
     private javax.swing.JTextField NameField;
     private javax.swing.JTextField PasswordField;
     private javax.swing.JButton RefreshBtn;
     private javax.swing.JButton SaveBtn;
+    private javax.swing.JLabel SucessfulSave;
     private javax.swing.JLabel TechnicianNameLabel;
     private javax.swing.JTextField UsernameField;
     private javax.swing.JLabel jLabel1;

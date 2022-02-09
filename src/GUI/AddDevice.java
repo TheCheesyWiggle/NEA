@@ -21,6 +21,7 @@ public class AddDevice extends javax.swing.JFrame {
     public AddDevice() {
         initComponents();
         ErrorMessage.setVisible(false);
+        SucessfulSave.setVisible(false);
     }
 
     /**
@@ -46,6 +47,8 @@ public class AddDevice extends javax.swing.JFrame {
         RefreshBtn3 = new javax.swing.JButton();
         FindCustomerBtn = new javax.swing.JButton();
         ErrorMessage = new javax.swing.JLabel();
+        FieldMessage = new javax.swing.JLabel();
+        SucessfulSave = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -106,6 +109,14 @@ public class AddDevice extends javax.swing.JFrame {
         ErrorMessage.setForeground(new java.awt.Color(255, 0, 0));
         ErrorMessage.setText("Error Parameter invalid");
 
+        FieldMessage.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        FieldMessage.setForeground(new java.awt.Color(255, 0, 0));
+        FieldMessage.setText("Fields");
+
+        SucessfulSave.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        SucessfulSave.setForeground(new java.awt.Color(0, 153, 0));
+        SucessfulSave.setText("SUCESS");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -141,8 +152,13 @@ public class AddDevice extends javax.swing.JFrame {
                             .addComponent(CustomerField, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(135, 135, 135)
-                        .addComponent(ErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(FieldMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(SucessfulSave))
+                            .addComponent(ErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(124, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -153,7 +169,11 @@ public class AddDevice extends javax.swing.JFrame {
                     .addComponent(TechnicianNameLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(FieldMessage)
+                    .addComponent(SucessfulSave))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ErrorMessage)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -189,16 +209,29 @@ public class AddDevice extends javax.swing.JFrame {
         String Manufacturer = ManufacturerField.getText();
         //sets up array to loop through
         String array[] = {CustomerField.getText(), ModelField.getText(), ManufacturerField.getText()};
+        //sets up counter to count filled in fields
+        int counter = 0;
         //check if all the fields are filled in
         for (int i = 0;i<array.length;i++){
             if(array[i].equals("")){
-                ErrorMessage.setText("Fill in all Fields");
-                ErrorMessage.setVisible(true);
+                FieldMessage.setText("Fill in all Fields please");
+                FieldMessage.setVisible(true);
+            }
+            else{
+                counter++;
             }
         }
-        //take all the values and creates an object
-        Device newDevice = new Device(0,Model,Manufacturer,CustomerID);
-        respository.AddDevice(newDevice);
+        if(counter==3){
+           //take all the values and creates an object
+            Device newDevice = new Device(0,Model,Manufacturer,CustomerID);
+            respository.AddDevice(newDevice);
+            SucessfulSave.setText("Sucessful Save!");
+            SucessfulSave.setVisible(true);
+        }
+        else{
+            FieldMessage.setVisible(true);
+        }
+        
     }//GEN-LAST:event_SaveBtnActionPerformed
 
     private void MainMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MainMenuBtnActionPerformed
@@ -262,12 +295,14 @@ public class AddDevice extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField CustomerField;
     private javax.swing.JLabel ErrorMessage;
+    private javax.swing.JLabel FieldMessage;
     private javax.swing.JButton FindCustomerBtn;
     private javax.swing.JToggleButton MainMenuBtn;
     private javax.swing.JTextField ManufacturerField;
     private javax.swing.JTextField ModelField;
     private javax.swing.JButton RefreshBtn3;
     private javax.swing.JButton SaveBtn;
+    private javax.swing.JLabel SucessfulSave;
     private javax.swing.JLabel TechnicianNameLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;

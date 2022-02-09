@@ -20,6 +20,8 @@ public class AddCustomer extends javax.swing.JFrame {
     public AddCustomer() {
         initComponents();
         ErrorMessage.setVisible(false);
+        FieldMessage.setVisible(false);
+        SucessfulSave.setVisible(false);
     }
 
     /**
@@ -53,6 +55,7 @@ public class AddCustomer extends javax.swing.JFrame {
         RefreshBtn = new javax.swing.JButton();
         ErrorMessage = new javax.swing.JLabel();
         FieldMessage = new javax.swing.JLabel();
+        SucessfulSave = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -133,6 +136,10 @@ public class AddCustomer extends javax.swing.JFrame {
         FieldMessage.setForeground(new java.awt.Color(255, 0, 0));
         FieldMessage.setText("Fields");
 
+        SucessfulSave.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        SucessfulSave.setForeground(new java.awt.Color(0, 153, 0));
+        SucessfulSave.setText("SUCESS");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -178,6 +185,11 @@ public class AddCustomer extends javax.swing.JFrame {
                             .addComponent(ErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(FieldMessage))))
                 .addContainerGap(54, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(188, 188, 188)
+                    .addComponent(SucessfulSave)
+                    .addContainerGap(189, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,6 +234,11 @@ public class AddCustomer extends javax.swing.JFrame {
                     .addComponent(MainMenuBtn)
                     .addComponent(RefreshBtn))
                 .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(83, 83, 83)
+                    .addComponent(SucessfulSave, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(283, Short.MAX_VALUE)))
         );
 
         pack();
@@ -241,24 +258,32 @@ public class AddCustomer extends javax.swing.JFrame {
         String Postcode = PostcodeField.getText();
         //sets up array to loop through
         String array[] = {FirstName, LastName, Email, PhoneNumber, Address, Postcode};
+        //sets up counter to count filled in fields
+        int counter = 0;
         //check if all the fields are filled in
         for (int i = 0;i<array.length;i++){
             if(array[i].equals("")){
-                FieldMessage.setText("Fill in all Fields");
+                FieldMessage.setText("Fill in all Fields please");
                 FieldMessage.setVisible(true);
             }
+            else{
+                counter++;
+            }
         }
-        //check phone number and email values
-        if(PatternMatching.emailValdation(Email) && PatternMatching.phoneNumberValdation(PhoneNumber)){
+        //check phone number and email values ad if all the feilds have been filled in
+        if(PatternMatching.emailValdation(Email) && PatternMatching.phoneNumberValdation(PhoneNumber)&&(counter==6)){
             //creates it into an object get the right change customer id 
             Customer newCustomer = new Customer(0,FirstName,LastName,Email,PhoneNumber,Address,Postcode);
             //adds customer to database
             respository.AddCustomer(newCustomer);
+            SucessfulSave.setText("Sucessful Save!");
+            SucessfulSave.setVisible(true);
         }
         else{
             ErrorMessage.setText("Error Invalid Email or Phonenumber");
             ErrorMessage.setVisible(true);
         }
+
 
         /*
         verify if the email is a valid
@@ -327,6 +352,7 @@ public class AddCustomer extends javax.swing.JFrame {
     private javax.swing.JTextField PostcodeField;
     private javax.swing.JButton RefreshBtn;
     private javax.swing.JButton SaveBtn;
+    private javax.swing.JLabel SucessfulSave;
     private javax.swing.JLabel TechnicianNameLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
