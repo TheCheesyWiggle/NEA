@@ -129,7 +129,7 @@ public class OpenTicket extends javax.swing.JFrame {
 
         ErrorMessage.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         ErrorMessage.setForeground(new java.awt.Color(255, 0, 0));
-        ErrorMessage.setText("Error Parameter invalid");
+        ErrorMessage.setText("Error Parameters Invalid");
 
         FieldMessage.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         FieldMessage.setForeground(new java.awt.Color(255, 0, 0));
@@ -243,8 +243,8 @@ public class OpenTicket extends javax.swing.JFrame {
                     .addComponent(jLabel9)
                     .addComponent(PriorityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(OpenDateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)

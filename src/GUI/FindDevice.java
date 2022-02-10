@@ -159,72 +159,80 @@ public class FindDevice extends javax.swing.JFrame {
     }//GEN-LAST:event_MainMenuBtnActionPerformed
 
     private void SearchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchBtnActionPerformed
-        //based on search properties search for the different devices
-        ArrayList<Device> Devices = new ArrayList<Device>(); 
-        //creates a list model to edit later
-        DefaultListModel listModel = new DefaultListModel();
-        //switch statement to check the search condition
-        switch (SearchCondition.getSelectedIndex()) {
-            case 0:
-                //Retrieves customerID from the search bar
-                int DeviceID = Integer.parseInt(SearchBar.getText());
-                //Fills the arraylist wih relevant customer objects
-                Devices = LibraryFunctions.respository.findDevicesID(DeviceID);
-                //loops through the customers arraylist and adds the objects to the list models
-                for (Device Device : Devices) {
-                    listModel.addElement(Device);
+        try{
+            if(!(SearchBar.getText().equals(""))){
+                //based on search properties search for the different devices
+                ArrayList<Device> Devices = new ArrayList<Device>(); 
+                //creates a list model to edit later
+                DefaultListModel listModel = new DefaultListModel();
+                //switch statement to check the search condition
+                switch (SearchCondition.getSelectedIndex()) {
+                    case 0:
+                        //Retrieves customerID from the search bar
+                        int DeviceID = Integer.parseInt(SearchBar.getText());
+                        //Fills the arraylist wih relevant customer objects
+                        Devices = LibraryFunctions.respository.findDevicesID(DeviceID);
+                        //loops through the customers arraylist and adds the objects to the list models
+                        for (Device Device : Devices) {
+                            listModel.addElement(Device);
+                        }
+                        //sets the list model
+                        ResultsList.setModel(listModel);
+                        break;
+                    case 1:
+                        //Retrieves device manufacturer from the search bar
+                        String manufacturer = SearchBar.getText();
+                        //Fills the arraylist wih relevant customer objects
+                        Devices = LibraryFunctions.respository.findDevicesManufacturer(manufacturer);
+                        //loops through the customers arraylist and adds the objects to the list models
+                        for (Device Device : Devices) {
+                            listModel.addElement(Device);
+                        }
+                        //sets the list model
+                        ResultsList.setModel(listModel);
+                        break;
+                    case 2:
+                        //Retrieves DeviceID from the search bar
+                        int CustomerID = Integer.parseInt(SearchBar.getText());
+                        //Fills the arraylist wih relevant customer objects
+                        Devices = LibraryFunctions.respository.findDevicesCustomerID(CustomerID);
+                        //loops through the customers arraylist and adds the objects to the list models
+                        for (Device Device : Devices) {
+                            listModel.addElement(Device);
+                        }
+                        //sets the list model
+                        ResultsList.setModel(listModel);
+                        break;
+                    case 3:
+                        //Retrieves customers name from the search bar
+                        String model = SearchBar.getText();
+                        //Fills the arraylist wih relevant customer objects
+                        Devices = LibraryFunctions.respository.findDevicesModel(model);
+                        //loops through the customers arraylist and adds the objects to the list models
+                        for (Device Device : Devices) {
+                            listModel.addElement(Device);
+                        }
+                        //sets the list model
+                        ResultsList.setModel(listModel);
+                        break;
+                    case 4:
+                        //Retrieves TicketID from the search bar
+                        int TicketID = Integer.parseInt(SearchBar.getText());
+                        //Fills the arraylist wih relevant customer objects
+                        Devices = LibraryFunctions.respository.findDevicesTicketID(TicketID);
+                        //loops through the customers arraylist and adds the objects to the list models
+                        for (Device Device : Devices) {
+                            listModel.addElement(Device);
+                        }
+                        //sets the list model
+                        ResultsList.setModel(listModel);
+                        break;
                 }
-                //sets the list model
-                ResultsList.setModel(listModel);
-                break;
-            case 1:
-                //Retrieves device manufacturer from the search bar
-                String manufacturer = SearchBar.getText();
-                //Fills the arraylist wih relevant customer objects
-                Devices = LibraryFunctions.respository.findDevicesManufacturer(manufacturer);
-                //loops through the customers arraylist and adds the objects to the list models
-                for (Device Device : Devices) {
-                    listModel.addElement(Device);
-                }
-                //sets the list model
-                ResultsList.setModel(listModel);
-                break;
-            case 2:
-                //Retrieves DeviceID from the search bar
-                int CustomerID = Integer.parseInt(SearchBar.getText());
-                //Fills the arraylist wih relevant customer objects
-                Devices = LibraryFunctions.respository.findDevicesCustomerID(CustomerID);
-                //loops through the customers arraylist and adds the objects to the list models
-                for (Device Device : Devices) {
-                    listModel.addElement(Device);
-                }
-                //sets the list model
-                ResultsList.setModel(listModel);
-                break;
-            case 3:
-                //Retrieves customers name from the search bar
-                String model = SearchBar.getText();
-                //Fills the arraylist wih relevant customer objects
-                Devices = LibraryFunctions.respository.findDevicesModel(model);
-                //loops through the customers arraylist and adds the objects to the list models
-                for (Device Device : Devices) {
-                    listModel.addElement(Device);
-                }
-                //sets the list model
-                ResultsList.setModel(listModel);
-                break;
-            case 4:
-                //Retrieves TicketID from the search bar
-                int TicketID = Integer.parseInt(SearchBar.getText());
-                //Fills the arraylist wih relevant customer objects
-                Devices = LibraryFunctions.respository.findDevicesTicketID(TicketID);
-                //loops through the customers arraylist and adds the objects to the list models
-                for (Device Device : Devices) {
-                    listModel.addElement(Device);
-                }
-                //sets the list model
-                ResultsList.setModel(listModel);
-                break;
+            ErrorMessage.setVisible(true); 
+            }
+        } catch (Exception e) {
+            System.out.println("Error in the repository class: " + e);
+            ErrorMessage.setVisible(true);  
         }
     }//GEN-LAST:event_SearchBtnActionPerformed
 

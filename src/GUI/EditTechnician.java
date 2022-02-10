@@ -49,6 +49,7 @@ public class EditTechnician extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         UsernameField1 = new javax.swing.JTextField();
         ErrorMessage = new javax.swing.JLabel();
+        SucessfulSave = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -108,6 +109,10 @@ public class EditTechnician extends javax.swing.JFrame {
         ErrorMessage.setForeground(new java.awt.Color(255, 0, 0));
         ErrorMessage.setText("Error Parameter invalid");
 
+        SucessfulSave.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        SucessfulSave.setForeground(new java.awt.Color(0, 153, 0));
+        SucessfulSave.setText("SUCESS");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -156,9 +161,14 @@ public class EditTechnician extends javax.swing.JFrame {
                         .addComponent(ErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(56, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(138, 138, 138)
+                .addGap(136, 136, 136)
                 .addComponent(jLabel6)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(150, 150, 150)
+                    .addComponent(SucessfulSave, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(150, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,9 +177,9 @@ public class EditTechnician extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(TechnicianNameLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6)
-                .addGap(18, 18, 18)
+                .addGap(23, 23, 23)
                 .addComponent(ErrorMessage)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -197,27 +207,55 @@ public class EditTechnician extends javax.swing.JFrame {
                     .addComponent(RefreshBtn)
                     .addComponent(MainMenuBtn))
                 .addGap(26, 26, 26))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(49, 49, 49)
+                    .addComponent(SucessfulSave)
+                    .addContainerGap(237, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void SaveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveBtnActionPerformed
+    try{
         //Grabs all the values inputted by the User
         String Name = NameField.getText();
         String Username = UsernameField.getText();
         String Password = PasswordField.getText();
         String Email = UsernameField.getText()+"@CompanyDomain.co.uk"; //autogen;
         boolean Admin = AdminCheckBox.isSelected();
+        
 
-        //creates it into an object (For customerID 0 is a place holder as the database automatically fills it in)
-        Technician newTechnician = new Technician(0,Name,Username,Password,Email,Admin);
-        respository.AddTechnician(newTechnician);
+        String array[] = {Name, Username, Password, Email};
+        //sets up counter to count filled in fields
+        int counter = 0;
+        //check if all the fields are filled in
+        for (int i = 0;i<array.length;i++){
+            if(array[i].equals("")){
+                ErrorMessage.setText("Fill in all Fields please");
+                ErrorMessage.setVisible(true);
+            }
+            else{
+                counter++;
+            }
+        }
+        if(counter==4){
+                //creates it into an object (For customerID 0 is a place holder as the database automatically fills it in)
+                Technician newTechnician = new Technician(0,Name,Username,Password,Email,Admin);
+                respository.editTechnician(newTechnician);
+                SucessfulSave.setText("Sucessful Save!");
+                SucessfulSave.setVisible(true);
+            }
+        else{
+            ErrorMessage.setVisible(true);
+        }
 
-        //refreshes the page
-        AddTechnician addTech = new AddTechnician();
-        addTech.setVisible(true);
-        this.dispose();
+        } catch (Exception e) {
+                System.out.println("Error in the repository class: " + e);
+                ErrorMessage.setText("Fill in all Fields please");
+                ErrorMessage.setVisible(true);
+        }
     }//GEN-LAST:event_SaveBtnActionPerformed
 
     private void RefreshBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshBtnActionPerformed
@@ -283,6 +321,7 @@ public class EditTechnician extends javax.swing.JFrame {
     private javax.swing.JTextField PasswordField;
     private javax.swing.JButton RefreshBtn;
     private javax.swing.JButton SaveBtn;
+    private javax.swing.JLabel SucessfulSave;
     private javax.swing.JLabel TechnicianNameLabel;
     private javax.swing.JTextField UsernameField;
     private javax.swing.JTextField UsernameField1;

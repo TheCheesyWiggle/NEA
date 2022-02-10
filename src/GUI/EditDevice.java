@@ -6,6 +6,7 @@
 package GUI;
 
 import LibraryFunctions.respository;
+import Objects.Device;
 
 /**
  *
@@ -45,6 +46,9 @@ public class EditDevice extends javax.swing.JFrame {
         RefreshBtn3 = new javax.swing.JButton();
         FindCustomerBtn = new javax.swing.JButton();
         ErrorMessage = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        PriorityField = new javax.swing.JTextField();
+        SucessfulSave = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -105,6 +109,12 @@ public class EditDevice extends javax.swing.JFrame {
         ErrorMessage.setForeground(new java.awt.Color(255, 0, 0));
         ErrorMessage.setText("Error Parameter invalid");
 
+        jLabel2.setText("Priority:");
+
+        SucessfulSave.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        SucessfulSave.setForeground(new java.awt.Color(0, 153, 0));
+        SucessfulSave.setText("SUCESS");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -114,37 +124,41 @@ public class EditDevice extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(TechnicianNameLabel)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(101, 101, 101)
-                        .addComponent(jLabel9)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(TechnicianNameLabel)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(SucessfulSave))
+                            .addComponent(jLabel9))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(124, 124, 124)
+                .addComponent(ErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(SaveBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel6))
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(ManufacturerField)
-                            .addComponent(ModelField)
-                            .addComponent(CustomerField, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(FindCustomerBtn)
                         .addGap(28, 28, 28)
                         .addComponent(RefreshBtn3)
                         .addGap(18, 18, 18)
-                        .addComponent(MainMenuBtn))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(124, 124, 124)
-                .addComponent(ErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(MainMenuBtn))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel2))
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(ManufacturerField)
+                            .addComponent(ModelField)
+                            .addComponent(CustomerField, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
+                            .addComponent(PriorityField)))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,17 +169,23 @@ public class EditDevice extends javax.swing.JFrame {
                     .addComponent(TechnicianNameLabel))
                 .addGap(43, 43, 43)
                 .addComponent(jLabel9)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(SucessfulSave)
+                .addGap(4, 4, 4)
                 .addComponent(ErrorMessage)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(ManufacturerField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ManufacturerField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(ModelField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(PriorityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(CustomerField, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -189,16 +209,45 @@ public class EditDevice extends javax.swing.JFrame {
     }//GEN-LAST:event_CustomerFieldActionPerformed
 
     private void SaveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveBtnActionPerformed
-        /*
-        //Grabs all the values inputted by the User
-        int CustomerID = Integer.parseInt(CustomerField.getText());
-        String Model = ModelField.getText();
-        String Manufacturer = ManufacturerField.getText();
-        String Priority = PriorityField.getText();
-        //take all the values and creates an object
-        Device newDevice = new Device(0,CustomerID,Model,Manufacturer,Priority);
-        respository.AddDevice(newDevice);
-        */
+        try{
+            //Grabs all the values inputted by the User
+            int CustomerID = Integer.parseInt(CustomerField.getText());
+            String Model = ModelField.getText();
+            String Manufacturer = ManufacturerField.getText();
+
+            //sets up array to loop through
+            String array[] = {CustomerField.getText(), ModelField.getText(), ManufacturerField.getText()};
+
+            //sets up counter to count filled in fields
+            int counter = 0;
+            //check if all the fields are filled in
+            for (int i = 0;i<array.length;i++){
+                if(array[i].equals("")){
+                    ErrorMessage.setText("Fill in all Fields please");
+                    ErrorMessage.setVisible(true);
+                }
+                else{
+                    counter++;
+                }
+            }
+            if(counter==3){
+               //take all the values and creates an object
+                Device newDevice = new Device(0,Model,Manufacturer,CustomerID);
+                respository.editDevice(newDevice);
+                SucessfulSave.setText("Sucessful Save!");
+                SucessfulSave.setVisible(true);
+            }
+            else{
+                ErrorMessage.setVisible(true);
+            }
+        } catch (Exception e) {
+                System.out.println("Error in the repository class: " + e);
+                ErrorMessage.setText("Fill in all Fields please");
+                ErrorMessage.setVisible(true);
+        }
+        
+        
+        
     }//GEN-LAST:event_SaveBtnActionPerformed
 
     private void MainMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MainMenuBtnActionPerformed
@@ -263,10 +312,13 @@ public class EditDevice extends javax.swing.JFrame {
     private javax.swing.JToggleButton MainMenuBtn;
     private javax.swing.JTextField ManufacturerField;
     private javax.swing.JTextField ModelField;
+    private javax.swing.JTextField PriorityField;
     private javax.swing.JButton RefreshBtn3;
     private javax.swing.JButton SaveBtn;
+    private javax.swing.JLabel SucessfulSave;
     private javax.swing.JLabel TechnicianNameLabel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;

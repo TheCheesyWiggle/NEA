@@ -22,6 +22,7 @@ public class AddDevice extends javax.swing.JFrame {
         initComponents();
         ErrorMessage.setVisible(false);
         SucessfulSave.setVisible(false);
+        FieldMessage.setVisible(false);
     }
 
     /**
@@ -152,12 +153,12 @@ public class AddDevice extends javax.swing.JFrame {
                             .addComponent(CustomerField, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(135, 135, 135)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(FieldMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(SucessfulSave))
-                            .addComponent(ErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(ErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(110, 110, 110)
+                        .addComponent(FieldMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(SucessfulSave)))
                 .addContainerGap(124, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -203,35 +204,41 @@ public class AddDevice extends javax.swing.JFrame {
     }//GEN-LAST:event_ManufacturerFieldActionPerformed
 
     private void SaveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveBtnActionPerformed
-        //Grabs all the values inputted by the User
-        int CustomerID = Integer.parseInt(CustomerField.getText());
-        String Model = ModelField.getText();
-        String Manufacturer = ManufacturerField.getText();
-        //sets up array to loop through
-        String array[] = {CustomerField.getText(), ModelField.getText(), ManufacturerField.getText()};
-        //sets up counter to count filled in fields
-        int counter = 0;
-        //check if all the fields are filled in
-        for (int i = 0;i<array.length;i++){
-            if(array[i].equals("")){
-                FieldMessage.setText("Fill in all Fields please");
-                FieldMessage.setVisible(true);
+        try{
+            //Grabs all the values inputted by the User
+            int CustomerID = Integer.parseInt(CustomerField.getText());
+            String Model = ModelField.getText();
+            String Manufacturer = ManufacturerField.getText();
+            //sets up array to loop through
+            String array[] = {CustomerField.getText(), ModelField.getText(), ManufacturerField.getText()};
+
+            //sets up counter to count filled in fields
+            int counter = 0;
+            //check if all the fields are filled in
+            for (int i = 0;i<array.length;i++){
+                if(array[i].equals("")){
+                    FieldMessage.setText("Fill in all Fields please");
+                    FieldMessage.setVisible(true);
+                }
+                else{
+                    counter++;
+                }
+            }
+            if(counter==3){
+               //take all the values and creates an object
+                Device newDevice = new Device(0,Model,Manufacturer,CustomerID);
+                respository.AddDevice(newDevice);
+                SucessfulSave.setText("Sucessful Save!");
+                SucessfulSave.setVisible(true);
             }
             else{
-                counter++;
+                FieldMessage.setVisible(true);
             }
+        } catch (Exception e) {
+                System.out.println("Error in the repository class: " + e);
+                FieldMessage.setText("Fill in all Fields please");
+                FieldMessage.setVisible(true);
         }
-        if(counter==3){
-           //take all the values and creates an object
-            Device newDevice = new Device(0,Model,Manufacturer,CustomerID);
-            respository.AddDevice(newDevice);
-            SucessfulSave.setText("Sucessful Save!");
-            SucessfulSave.setVisible(true);
-        }
-        else{
-            FieldMessage.setVisible(true);
-        }
-        
     }//GEN-LAST:event_SaveBtnActionPerformed
 
     private void MainMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MainMenuBtnActionPerformed

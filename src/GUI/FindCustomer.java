@@ -178,62 +178,68 @@ public class FindCustomer extends javax.swing.JFrame {
     }//GEN-LAST:event_EditCustomerBtnActionPerformed
 
     private void SearchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchBtnActionPerformed
-        ArrayList<Customer> Customers = new ArrayList<Customer>(); 
-        //sorts arraylist alphabetically
-        Customers = MergeSort.mergeSortCustomers(Customers);
-        //creates a list model to edit later
-        DefaultListModel listModel = new DefaultListModel();
-        //switch statement to check the serch condition
-        switch(SearchCondition.getSelectedIndex()){
-            case 0:
-                //Retrieves customerID from the search bar
-                int CustomerID = Integer.parseInt(SearchBar.getText());
-                //completes a mergesort on all the customers in the database
-                Customers = MergeSort.mergeSortCustomers(respository.findAllCustomers()); 
-                //performs binary search on the sorted list
-                Customer cust = BinarySearch.Customer(Customers, CustomerID);
-                System.out.println(cust.toString());
-                //adds customer to the list model
-                listModel.addElement(cust);
-                //sets the list model
-                ResultsList.setModel(listModel);
-                break;
-            case 1:
-                //Retrieves customers name from the search bar
-                String CustomerName = SearchBar.getText();
-                //Fills the arraylist wih relevant customer objects
-                Customers = LibraryFunctions.respository.findCustomersFirstName(CustomerName); 
-                //loops through the customers arraylist and adds the objects to the list models
-                for(Customer customer : Customers){
-                    listModel.addElement(customer);
+        try{
+            if(!(SearchBar.getText().equals(""))){       
+                ArrayList<Customer> Customers = new ArrayList<Customer>(); 
+                //sorts arraylist alphabetically
+                Customers = MergeSort.mergeSortCustomers(Customers);
+                //creates a list model to edit later
+                DefaultListModel listModel = new DefaultListModel();
+                //switch statement to check the serch condition
+                switch(SearchCondition.getSelectedIndex()){
+                    case 0:
+                        //Retrieves customerID from the search bar
+                        int CustomerID = Integer.parseInt(SearchBar.getText());
+                        //completes a mergesort on all the customers in the database
+                        Customers = MergeSort.mergeSortCustomers(respository.findAllCustomers()); 
+                        //performs binary search on the sorted list
+                        Customer cust = BinarySearch.Customer(Customers, CustomerID);
+                        System.out.println(cust.toString());
+                        //adds customer to the list model
+                        listModel.addElement(cust);
+                        //sets the list model
+                        ResultsList.setModel(listModel);
+                        break;
+                    case 1:
+                        //Retrieves customers name from the search bar
+                        String CustomerName = SearchBar.getText();
+                        //Fills the arraylist wih relevant customer objects
+                        Customers = LibraryFunctions.respository.findCustomersFirstName(CustomerName); 
+                        //loops through the customers arraylist and adds the objects to the list models
+                        for(Customer customer : Customers){
+                            listModel.addElement(customer);
+                        }
+                        //sets the list model
+                        ResultsList.setModel(listModel);
+                        break;
+                    case 2:
+                        //Retrieves DeviceID from the search bar
+                        int DeviceID = Integer.parseInt(SearchBar.getText());
+                        //Fills the arraylist wih relevant customer objects
+                        Customers = LibraryFunctions.respository.findCustomersDevcieID(DeviceID); 
+                        //loops through the customers arraylist and adds the objects to the list models
+                        for(Customer customer : Customers){
+                            listModel.addElement(customer);
+                        }
+                        //sets the list model
+                        ResultsList.setModel(listModel);
+                        break;
+                    case 3:
+                        //Retrieves TicketID from the search bar
+                        int TicketID = Integer.parseInt(SearchBar.getText());
+                        //Fills the arraylist wih relevant customer objects
+                        for(Customer customer : Customers){
+                            listModel.addElement(customer);
+                        }
+                        //sets the list model
+                        ResultsList.setModel(listModel);
+                        break;
                 }
-                //sets the list model
-                ResultsList.setModel(listModel);
-                break;
-            case 2:
-                //Retrieves DeviceID from the search bar
-                int DeviceID = Integer.parseInt(SearchBar.getText());
-                //Fills the arraylist wih relevant customer objects
-                Customers = LibraryFunctions.respository.findCustomersDevcieID(DeviceID); 
-                //loops through the customers arraylist and adds the objects to the list models
-                for(Customer customer : Customers){
-                    listModel.addElement(customer);
-                }
-                //sets the list model
-                ResultsList.setModel(listModel);
-                break;
-            case 3:
-                //Retrieves TicketID from the search bar
-                int TicketID = Integer.parseInt(SearchBar.getText());
-                //Fills the arraylist wih relevant customer objects
-                for(Customer customer : Customers){
-                    listModel.addElement(customer);
-                }
-                //sets the list model
-                ResultsList.setModel(listModel);
-                break;
+            }
+        } catch (Exception e) {
+            System.out.println("Error in the repository class: " + e);
+            ErrorMessage.setVisible(true);  
         }
-        
     }//GEN-LAST:event_SearchBtnActionPerformed
 
     private void ResultsListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ResultsListMouseClicked

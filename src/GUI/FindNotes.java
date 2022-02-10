@@ -151,50 +151,58 @@ public class FindNotes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void FindBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FindBtnActionPerformed
-        ArrayList<Note> Notes = new ArrayList<Note>();
-        //creates a list model to edit later
-        DefaultListModel listModel = new DefaultListModel();
-        //switch statement to check the serch condition
-        switch(SearchCondition.getSelectedIndex()){
-            case 0:
-            //Retrieves NoteID from the search bar
-            int NoteID = Integer.parseInt(SearchBar.getText());
-            System.out.println(NoteID);
-            //Fills the arraylist wih relevant Note objects
-            Notes = respository.findNotesID(NoteID);
-            //loops through the Notes arraylist and adds the objects to the list models
-            for(Note note : Notes){
-                System.out.println(note.toString());
-                listModel.addElement(note);
-            }
-            //sets the list model
-            ResultsList.setModel(listModel);
-            break;
+        try{
+            if(!(SearchBar.getText().equals(""))){
+                ArrayList<Note> Notes = new ArrayList<Note>();
+                //creates a list model to edit later
+                DefaultListModel listModel = new DefaultListModel();
+                //switch statement to check the serch condition
+                switch(SearchCondition.getSelectedIndex()){
+                    case 0:
+                    //Retrieves NoteID from the search bar
+                    int NoteID = Integer.parseInt(SearchBar.getText());
+                    System.out.println(NoteID);
+                    //Fills the arraylist wih relevant Note objects
+                    Notes = respository.findNotesID(NoteID);
+                    //loops through the Notes arraylist and adds the objects to the list models
+                    for(Note note : Notes){
+                        System.out.println(note.toString());
+                        listModel.addElement(note);
+                    }
+                    //sets the list model
+                    ResultsList.setModel(listModel);
+                    break;
 
-            case 1:
-            //Retrieves TicketID from the search bar
-            int TicketID = Integer.parseInt(SearchBar.getText());
-            //Fills the arraylist wih relevant Note objects
-            Notes = respository.findNotesTicketID(TicketID);
-            //loops through the Notes arraylist and adds the objects to the list models
-            for(Note note : Notes){
-                listModel.addElement(note);
+                    case 1:
+                    //Retrieves TicketID from the search bar
+                    int TicketID = Integer.parseInt(SearchBar.getText());
+                    //Fills the arraylist wih relevant Note objects
+                    Notes = respository.findNotesTicketID(TicketID);
+                    //loops through the Notes arraylist and adds the objects to the list models
+                    for(Note note : Notes){
+                        listModel.addElement(note);
+                    }
+                    //sets the list model
+                    ResultsList.setModel(listModel);
+                    break;
+                    case 2:
+                    //Retrieves DeviceID from the search bar
+                    int DeviceID = Integer.parseInt(SearchBar.getText());
+                    //Fills the arraylist wih relevant note objects
+                    Notes = respository.findNotesDeviceID(DeviceID);
+                    //loops through the Notes arraylist and adds the objects to the list models
+                    for(Note note : Notes){
+                        listModel.addElement(note);
+                    }
+                    //sets the list model
+                    ResultsList.setModel(listModel);
+                    break;
+                }
             }
-            //sets the list model
-            ResultsList.setModel(listModel);
-            break;
-            case 2:
-            //Retrieves DeviceID from the search bar
-            int DeviceID = Integer.parseInt(SearchBar.getText());
-            //Fills the arraylist wih relevant note objects
-            Notes = respository.findNotesDeviceID(DeviceID);
-            //loops through the Notes arraylist and adds the objects to the list models
-            for(Note note : Notes){
-                listModel.addElement(note);
-            }
-            //sets the list model
-            ResultsList.setModel(listModel);
-            break;
+            ErrorMessage.setVisible(true);    
+        } catch (Exception e) {
+            System.out.println("Error in the repository class: " + e);
+            ErrorMessage.setVisible(true);  
         }
     }//GEN-LAST:event_FindBtnActionPerformed
 

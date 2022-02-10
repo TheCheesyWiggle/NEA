@@ -216,37 +216,41 @@ public class AddTechnician extends javax.swing.JFrame {
     }//GEN-LAST:event_RefreshBtnActionPerformed
 
     private void SaveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveBtnActionPerformed
-        //Grabs all the values inputted by the User
-        String Name = NameField.getText();
-        String Username = UsernameField.getText();
-        String Password = PasswordField.getText();
-        String Email = UsernameField.getText()+"@CompanyDomain.co.uk"; //autogen;
-        boolean Admin = AdminCheckBox.isSelected();
-        
-        String array[] = {Name, Username, Password, Email, new Boolean(Admin).toString()};
-        //sets up counter to count filled in fields
-        int counter = 0;
-        //check if all the fields are filled in
-        for (int i = 0;i<array.length;i++){
-            if(array[i].equals("")){
-                FieldMessage.setText("Fill in all Fields please");
-                FieldMessage.setVisible(true);
+        try{
+            //Grabs all the values inputted by the User
+            String Name = NameField.getText();
+            String Username = UsernameField.getText();
+            String Password = PasswordField.getText();
+            String Email = UsernameField.getText()+"@CompanyDomain.co.uk"; //autogen;
+            boolean Admin = AdminCheckBox.isSelected();
+
+            String array[] = {Name, Username, Password, Email, new Boolean(Admin).toString()};
+            //sets up counter to count filled in fields
+            int counter = 0;
+            //check if all the fields are filled in
+            for (int i = 0;i<array.length;i++){
+                if(array[i].equals("")){
+                    FieldMessage.setText("Fill in all Fields please");
+                    FieldMessage.setVisible(true);
+                }
+                else{
+                    counter++;
+                }
+            }
+            if(counter==5){
+                //creates it into an object (For customerID 0 is a place holder as the database automatically fills it in)
+                Technician newTechnician = new Technician(0,Name,Username,Password,Email,Admin);
+                respository.AddTechnician(newTechnician);    
+                SucessfulSave.setText("Sucessful Save!");
+                SucessfulSave.setVisible(true);
             }
             else{
-                counter++;
+                FieldMessage.setVisible(true);
             }
+        } catch (Exception e) {
+            System.out.println("Error in the repository class: " + e);
         }
-        if(counter==5){
-            //creates it into an object (For customerID 0 is a place holder as the database automatically fills it in)
-            Technician newTechnician = new Technician(0,Name,Username,Password,Email,Admin);
-            respository.AddTechnician(newTechnician);    
-            SucessfulSave.setText("Sucessful Save!");
-            SucessfulSave.setVisible(true);
-        }
-        else{
-            FieldMessage.setVisible(true);
-        }
-        
+
     }//GEN-LAST:event_SaveBtnActionPerformed
 
     /**

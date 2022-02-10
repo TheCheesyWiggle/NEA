@@ -56,6 +56,7 @@ public class EditTickets extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         PriorityField = new javax.swing.JTextField();
         ErrorMessage = new javax.swing.JLabel();
+        SucessfulSave = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -138,6 +139,10 @@ public class EditTickets extends javax.swing.JFrame {
         ErrorMessage.setForeground(new java.awt.Color(255, 0, 0));
         ErrorMessage.setText("Error Parameter invalid");
 
+        SucessfulSave.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        SucessfulSave.setForeground(new java.awt.Color(0, 153, 0));
+        SucessfulSave.setText("SUCESS");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -192,6 +197,11 @@ public class EditTickets extends javax.swing.JFrame {
                     .addComponent(ErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TechnicianNameLabel))
                 .addGap(166, 166, 166))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(176, 176, 176)
+                    .addComponent(SucessfulSave, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(176, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -240,6 +250,11 @@ public class EditTickets extends javax.swing.JFrame {
                             .addComponent(FindDeviceBtn)))
                     .addComponent(jLabel4))
                 .addGap(23, 23, 23))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(91, 91, 91)
+                    .addComponent(SucessfulSave)
+                    .addContainerGap(256, Short.MAX_VALUE)))
         );
 
         pack();
@@ -266,18 +281,46 @@ public class EditTickets extends javax.swing.JFrame {
     }//GEN-LAST:event_MainMenuBtnActionPerformed
 
     private void SaveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveBtnActionPerformed
-        //Grabs all the values inputted by the User
-        int CustomerID = Integer.parseInt(CustomerIDField.getText());
-        int DeviceID = Integer.parseInt(DeviceIDField.getText());
-        String Issue = IssueField.getText();
-        String RepairStat = RepairStatus.getItemAt(RepairStatus.getSelectedIndex());
-        int Priority = Integer.parseInt(PriorityField.getText());
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate startdate = LocalDate.parse(OpenDateField.getText(), formatter);
-        LocalDate closedate = LocalDate.parse("01/01/0001", formatter);
+        try{
+            //Grabs all the values inputted by the User
+            int CustomerID = Integer.parseInt(CustomerIDField.getText());
+            int DeviceID = Integer.parseInt(DeviceIDField.getText());
+            String Issue = IssueField.getText();
+            String RepairStat = RepairStatus.getItemAt(RepairStatus.getSelectedIndex());
+            int Priority = Integer.parseInt(PriorityField.getText());
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            LocalDate startdate = LocalDate.parse(OpenDateField.getText(), formatter);
+            LocalDate closedate = LocalDate.parse("01/01/0001", formatter);
 
-        Ticket newTicket = new Ticket(0,Issue,RepairStat,Priority,startdate,closedate,DeviceID);
-        respository.AddTicket(newTicket);
+            
+            String array[] = {CustomerIDField.getText(), DeviceIDField.getText(), Issue, RepairStat,PriorityField.getText(),OpenDateField.getText()};
+            //sets up counter to count filled in fields
+            int counter = 0;
+            //check if all the fields are filled in
+            for (int i = 0;i<array.length;i++){
+                if(array[i].equals("")){
+                    ErrorMessage.setText("Fill in all Fields please");
+                    ErrorMessage.setVisible(true);
+                }
+                else{
+                    counter++;
+                }
+            }
+            if(counter==4){
+                    //creates it into an object (For customerID 0 is a place holder as the database automatically fills it in)
+                    Ticket newTicket = new Ticket(0,Issue,RepairStat,Priority,startdate,closedate,DeviceID);
+                    respository.editTicket(newTicket);
+                    SucessfulSave.setText("Sucessful Save!");
+                    SucessfulSave.setVisible(true);
+                }
+            else{
+                ErrorMessage.setVisible(true);
+            }            
+        }  catch (Exception e) {
+                System.out.println("Error in the repository class: " + e);
+                ErrorMessage.setText("Fill in all Fields please");
+                ErrorMessage.setVisible(true);
+        }
     }//GEN-LAST:event_SaveBtnActionPerformed
 
     private void FindDeviceBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FindDeviceBtnActionPerformed
@@ -341,6 +384,7 @@ public class EditTickets extends javax.swing.JFrame {
     private javax.swing.JTextField PriorityField;
     private javax.swing.JComboBox<String> RepairStatus;
     private javax.swing.JButton SaveBtn;
+    private javax.swing.JLabel SucessfulSave;
     private javax.swing.JLabel TechnicianNameLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

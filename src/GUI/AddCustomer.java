@@ -249,46 +249,47 @@ public class AddCustomer extends javax.swing.JFrame {
     }//GEN-LAST:event_FirstNameFieldActionPerformed
 
     private void SaveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveBtnActionPerformed
-        //Grabs all the values inputted by the User
-        String FirstName = FirstNameField.getText();
-        String LastName = LastNameField.getText();
-        String Email = EmailField.getText();
-        String PhoneNumber = PhoneNumberField.getText();
-        String Address = AddressField.getText();
-        String Postcode = PostcodeField.getText();
-        //sets up array to loop through
-        String array[] = {FirstName, LastName, Email, PhoneNumber, Address, Postcode};
-        //sets up counter to count filled in fields
-        int counter = 0;
-        //check if all the fields are filled in
-        for (int i = 0;i<array.length;i++){
-            if(array[i].equals("")){
-                FieldMessage.setText("Fill in all Fields please");
-                FieldMessage.setVisible(true);
+        try{    
+            //Grabs all the values inputted by the User
+            String FirstName = FirstNameField.getText();
+            String LastName = LastNameField.getText();
+            String Email = EmailField.getText();
+            String PhoneNumber = PhoneNumberField.getText();
+            String Address = AddressField.getText();
+            String Postcode = PostcodeField.getText();
+            //sets up array to loop through
+            String array[] = {FirstName, LastName, Email, PhoneNumber, Address, Postcode};
+            //sets up counter to count filled in fields
+            int counter = 0;
+            //check if all the fields are filled in
+            for (int i = 0;i<array.length;i++){
+                if(array[i].equals("")){
+                    FieldMessage.setText("Fill in all Fields please");
+                    FieldMessage.setVisible(true);
+                }
+                else{
+                    counter++;
+                }
+            }
+            //check phone number and email values ad if all the feilds have been filled in
+            if(PatternMatching.emailValdation(Email) && PatternMatching.phoneNumberValdation(PhoneNumber)&&(counter==6)){
+                //creates it into an object get the right change customer id 
+                Customer newCustomer = new Customer(0,FirstName,LastName,Email,PhoneNumber,Address,Postcode);
+                //adds customer to database
+                respository.AddCustomer(newCustomer);
+                SucessfulSave.setText("Sucessful Save!");
+                SucessfulSave.setVisible(true);
             }
             else{
-                counter++;
+                ErrorMessage.setText("Error Invalid Email or Phonenumber");
+                ErrorMessage.setVisible(true);
             }
-        }
-        //check phone number and email values ad if all the feilds have been filled in
-        if(PatternMatching.emailValdation(Email) && PatternMatching.phoneNumberValdation(PhoneNumber)&&(counter==6)){
-            //creates it into an object get the right change customer id 
-            Customer newCustomer = new Customer(0,FirstName,LastName,Email,PhoneNumber,Address,Postcode);
-            //adds customer to database
-            respository.AddCustomer(newCustomer);
-            SucessfulSave.setText("Sucessful Save!");
-            SucessfulSave.setVisible(true);
-        }
-        else{
-            ErrorMessage.setText("Error Invalid Email or Phonenumber");
-            ErrorMessage.setVisible(true);
+        } catch (Exception e) {
+                System.out.println("Error in the repository class: " + e);
+                FieldMessage.setText("Fill in all Fields please");
+                FieldMessage.setVisible(true);
         }
 
-
-        /*
-        verify if the email is a valid
-        Adds to local customer arraylist since it will probably been used again soon
-        */
     }//GEN-LAST:event_SaveBtnActionPerformed
 
     private void MainMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MainMenuBtnActionPerformed

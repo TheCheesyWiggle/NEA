@@ -46,6 +46,7 @@ public class EditNotes extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         NoteIDField = new javax.swing.JTextField();
         ErrorMessage = new javax.swing.JLabel();
+        SucessfulSave = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,6 +91,10 @@ public class EditNotes extends javax.swing.JFrame {
         ErrorMessage.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         ErrorMessage.setForeground(new java.awt.Color(255, 0, 0));
         ErrorMessage.setText("Error Parameter invalid");
+
+        SucessfulSave.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        SucessfulSave.setForeground(new java.awt.Color(0, 153, 0));
+        SucessfulSave.setText("SUCESS");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -136,6 +141,11 @@ public class EditNotes extends javax.swing.JFrame {
                             .addComponent(TechnicianNameLabel)
                             .addGap(214, 214, 214)))
                     .addContainerGap(57, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(139, 139, 139)
+                    .addComponent(SucessfulSave, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(197, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,6 +184,11 @@ public class EditNotes extends javax.swing.JFrame {
                         .addComponent(RefreshBtn)
                         .addComponent(MainMenuBtn))
                     .addContainerGap()))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(99, 99, 99)
+                    .addComponent(SucessfulSave)
+                    .addContainerGap(257, Short.MAX_VALUE)))
         );
 
         pack();
@@ -186,18 +201,44 @@ public class EditNotes extends javax.swing.JFrame {
     }//GEN-LAST:event_MainMenuBtnActionPerformed
 
     private void SaveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveBtnActionPerformed
-        //collects all parameters
-        String Content = ContentField.getText();
-        int TicketID = Integer.parseInt(TicketIDField.getText());
-        int NoteID = Integer.parseInt(NoteIDField.getText());
-        //create note object
-        Note newNote = new Note(NoteID,Content,TicketID,1/*changes to techs ID*/);
-        //update database
-        respository.editNotes(newNote);
-        //refresh
-        EditNotes editnotes = new EditNotes();
-        editnotes.setVisible(true);
-        this.dispose();
+        try{    
+            //collects all parameters
+            String Content = ContentField.getText();
+            int TicketID = Integer.parseInt(TicketIDField.getText());
+            int NoteID = Integer.parseInt(NoteIDField.getText());
+            
+                        //sets up array to loop through
+            String array[] = {ContentField.getText(), TicketIDField.getText(), NoteIDField.getText()};
+
+            //sets up counter to count filled in fields
+            int counter = 0;
+            //check if all the fields are filled in
+            for (int i = 0;i<array.length;i++){
+                if(array[i].equals("")){
+                    ErrorMessage.setText("Fill in all Fields please");
+                    ErrorMessage.setVisible(true);
+                }
+                else{
+                    counter++;
+                }
+            }
+            if(counter==3){
+                //create note object
+                Note newNote = new Note(NoteID,Content,TicketID,1/*changes to techs ID*/);
+                //update database
+                respository.editNotes(newNote);
+                SucessfulSave.setText("Sucessful Save!");
+                SucessfulSave.setVisible(true);
+            }
+            else{
+                ErrorMessage.setVisible(true);
+            }
+
+        } catch (Exception e) {
+                System.out.println("Error in the repository class: " + e);
+                ErrorMessage.setText("Fill in all Fields please");
+                ErrorMessage.setVisible(true);
+        }
     }//GEN-LAST:event_SaveBtnActionPerformed
 
     private void RefreshBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RefreshBtnActionPerformed
@@ -248,6 +289,7 @@ public class EditNotes extends javax.swing.JFrame {
     private javax.swing.JTextField NoteIDField;
     private javax.swing.JButton RefreshBtn;
     private javax.swing.JButton SaveBtn;
+    private javax.swing.JLabel SucessfulSave;
     private javax.swing.JLabel TechnicianNameLabel;
     private javax.swing.JTextField TicketIDField;
     private javax.swing.JLabel jLabel1;

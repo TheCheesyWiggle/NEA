@@ -221,31 +221,48 @@ public class EditCustomer extends javax.swing.JFrame {
     }//GEN-LAST:event_FirstNameFieldActionPerformed
 
     private void SaveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveBtnActionPerformed
-    
-    //Grabs all the values inputted by the User
-    int CustomerID =  Integer.parseInt(CustomerIDField.getText());
-    String FirstName = FirstNameField.getText();
-    String LastName = LastNameField.getText();
-    String Email = EmailField.getText();
-    String PhoneNumber = PhoneNumberField.getText();
-    String Address = AddressField.getText();
-    String Postcode = PostcodeField.getText();
-    if(PatternMatching.emailValdation(Email) ){
-       //creates it into an object get the right change customer id 
-        Customer newCustomer = new Customer(CustomerID,FirstName,LastName,Email,PhoneNumber,Address,Postcode);
-        respository.editCustomer(newCustomer);
+    try{
+        //Grabs all the values inputted by the User
+        int CustomerID =  Integer.parseInt(CustomerIDField.getText());
+        String FirstName = FirstNameField.getText();
+        String LastName = LastNameField.getText();
+        String Email = EmailField.getText();
+        String PhoneNumber = PhoneNumberField.getText();
+        String Address = AddressField.getText();
+        String Postcode = PostcodeField.getText();
 
-        //refreshes the page
-        EditCustomer editCust = new EditCustomer();
-        editCust.setVisible(true);
-        this.dispose();
-    }
-    else{
-        ErrorMessage.setVisible(true);
-    }
+        //sets up array to loop through
+        String array[] = {CustomerIDField.getText(),FirstName, LastName, Email, PhoneNumber, Address, Postcode};
+        //sets up counter to count filled in fields
+                int counter = 0;
+                //check if all the fields are filled in
+                for (int i = 0;i<array.length;i++){
+                    if(array[i].equals("")){
+                        ErrorMessage.setText("Fill in all Fields please");
+                        ErrorMessage.setVisible(true);
+                    }
+                    else{
+                        counter++;
+                    }
+                }
+        if(PatternMatching.emailValdation(Email) ){
+           //creates it into an object get the right change customer id 
+            Customer newCustomer = new Customer(CustomerID,FirstName,LastName,Email,PhoneNumber,Address,Postcode);
+            respository.editCustomer(newCustomer);
 
-        //Adds to local customer arraylist since it will probably been used again soon
-        
+            //refreshes the page
+            EditCustomer editCust = new EditCustomer();
+            editCust.setVisible(true);
+            this.dispose();
+        }
+        else{
+            ErrorMessage.setVisible(true);
+        }
+    } catch (Exception e) {
+            System.out.println("Error in the repository class: " + e);
+            ErrorMessage.setText("Fill in all Fields please");
+            ErrorMessage.setVisible(true);
+        }
     }//GEN-LAST:event_SaveBtnActionPerformed
 
     private void MainMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MainMenuBtnActionPerformed

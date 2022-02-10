@@ -211,32 +211,38 @@ public class AddNotes extends javax.swing.JFrame {
     }//GEN-LAST:event_MainMenuBtnActionPerformed
 
     private void SaveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveBtnActionPerformed
-        //Grabs all the values inputted by the User
-        String Content = ContentField.getText();
-        int TicketID = Integer.parseInt(TicketIDField.getText());
-        
-        String array[] = {ContentField.getText(), TicketIDField.getText()};
-        //sets up counter to count filled in fields
-        int counter = 0;
-        //check if all the fields are filled in
-        for (int i = 0;i<array.length;i++){
-            if(array[i].equals("")){
-                FieldMessage.setText("Fill in all Fields please");
-                FieldMessage.setVisible(true);
+        try{
+            //Grabs all the values inputted by the User
+            String Content = ContentField.getText();
+            int TicketID = Integer.parseInt(TicketIDField.getText());
+
+            String array[] = {ContentField.getText(), TicketIDField.getText()};
+            //sets up counter to count filled in fields
+            int counter = 0;
+            //check if all the fields are filled in
+            for (int i = 0;i<array.length;i++){
+                if(array[i].equals("")){
+                    FieldMessage.setText("Fill in all Fields please");
+                    FieldMessage.setVisible(true);
+                }
+                else{
+                    counter++;
+                }
+            }
+            if(counter==2){
+                //creates it into an object (For noteID 0 is a place holder as the database automatically fills it in)
+                Note newNote = new Note(0,Content,TicketID,1/* get the current technicains id automatically*/);
+                LibraryFunctions.respository.AddNotes(newNote);   
+                SucessfulSave.setText("Sucessful Save!");
+                SucessfulSave.setVisible(true);
             }
             else{
-                counter++;
+                FieldMessage.setVisible(true);
             }
-        }
-        if(counter==2){
-            //creates it into an object (For noteID 0 is a place holder as the database automatically fills it in)
-            Note newNote = new Note(0,Content,TicketID,1/* get the current technicains id automatically*/);
-            LibraryFunctions.respository.AddNotes(newNote);   
-            SucessfulSave.setText("Sucessful Save!");
-            SucessfulSave.setVisible(true);
-        }
-        else{
-            FieldMessage.setVisible(true);
+        } catch (Exception e) {
+                System.out.println("Error in the repository class: " + e);
+                FieldMessage.setText("Fill in all Fields please");
+                FieldMessage.setVisible(true);
         }
     }//GEN-LAST:event_SaveBtnActionPerformed
 
