@@ -141,16 +141,16 @@ public class MergeSort {
                 //checks which ticket has higher priority
                 if(left.get(IndexL).getPriority()<= right.get(IndexR).getPriority()){
                     //adds the right lists value
-                    mergedList.add(right.get(IndexR));
+                    mergedList.add(left.get(IndexL));
                     //adds 1 to both the right and merged index pointers
-                    IndexR++;
+                    IndexL++;
                     IndexM++;
                 }
                 else{
                     //adds the left lists value
-                    mergedList.add(left.get(IndexL));
+                    mergedList.add(right.get(IndexR));
                     //adds 1 to both the left and merged index pointers
-                    IndexL++;
+                    IndexR++;
                     IndexM++;
                 }
             }

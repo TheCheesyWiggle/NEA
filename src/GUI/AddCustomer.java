@@ -266,6 +266,7 @@ public class AddCustomer extends javax.swing.JFrame {
                 if(array[i].equals("")){
                     FieldMessage.setText("Fill in all Fields please");
                     FieldMessage.setVisible(true);
+                    SucessfulSave.setVisible(false);
                 }
                 else{
                     counter++;
@@ -277,17 +278,20 @@ public class AddCustomer extends javax.swing.JFrame {
                 Customer newCustomer = new Customer(0,FirstName,LastName,Email,PhoneNumber,Address,Postcode);
                 //adds customer to database
                 respository.AddCustomer(newCustomer);
+                ErrorMessage.setVisible(false);
                 SucessfulSave.setText("Sucessful Save!");
                 SucessfulSave.setVisible(true);
             }
             else{
                 ErrorMessage.setText("Error Invalid Email or Phonenumber");
                 ErrorMessage.setVisible(true);
+                SucessfulSave.setVisible(false);
             }
         } catch (Exception e) {
                 System.out.println("Error in the repository class: " + e);
                 FieldMessage.setText("Fill in all Fields please");
                 FieldMessage.setVisible(true);
+                SucessfulSave.setVisible(false);
         }
 
     }//GEN-LAST:event_SaveBtnActionPerformed

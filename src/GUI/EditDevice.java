@@ -21,6 +21,7 @@ public class EditDevice extends javax.swing.JFrame {
         initComponents();
         TechnicianNameLabel.setText(respository.getCurrentUser().getName());
         ErrorMessage.setVisible(false);
+        SucessfulSave.setVisible(false);
     }
 
     /**
@@ -263,11 +264,11 @@ public class EditDevice extends javax.swing.JFrame {
     }//GEN-LAST:event_RefreshBtn3ActionPerformed
 
     private void FindCustomerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FindCustomerBtnActionPerformed
-        /*
+
         FindCustomer FindCust = new FindCustomer();
         FindCust.setVisible(true);
         this.dispose();
-        */
+        
     }//GEN-LAST:event_FindCustomerBtnActionPerformed
 
     /**

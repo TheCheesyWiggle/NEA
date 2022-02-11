@@ -199,7 +199,10 @@ public class FindNotes extends javax.swing.JFrame {
                     break;
                 }
             }
-            ErrorMessage.setVisible(true);    
+            else{
+                ErrorMessage.setVisible(true);   
+            }
+             
         } catch (Exception e) {
             System.out.println("Error in the repository class: " + e);
             ErrorMessage.setVisible(true);  
@@ -217,7 +220,9 @@ public class FindNotes extends javax.swing.JFrame {
     }//GEN-LAST:event_MainMenuBtnActionPerformed
 
     private void EditNoteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditNoteBtnActionPerformed
-        
+        EditNotes EditNotes = new EditNotes();
+        EditNotes.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_EditNoteBtnActionPerformed
 
     /**

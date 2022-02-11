@@ -63,6 +63,11 @@ public class FindTicket extends javax.swing.JFrame {
         });
 
         EditTicketBtn.setText("Edit Ticket");
+        EditTicketBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditTicketBtnActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Return to Main Menu");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -219,12 +224,21 @@ public class FindTicket extends javax.swing.JFrame {
                         break;
                 }  
             }
-            ErrorMessage.setVisible(true);    
+            else{
+                ErrorMessage.setVisible(true);                  
+            }
+  
         } catch (Exception e) {
             System.out.println("Error in the repository class: " + e);
             ErrorMessage.setVisible(true);  
         }
     }//GEN-LAST:event_FindBtnActionPerformed
+
+    private void EditTicketBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditTicketBtnActionPerformed
+        EditTickets EditTicket = new EditTickets();
+        EditTicket.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_EditTicketBtnActionPerformed
 
     /**
      * @param args the command line arguments

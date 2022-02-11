@@ -267,6 +267,7 @@ public class OpenTicket extends javax.swing.JFrame {
     private void FindDeviceBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FindDeviceBtnActionPerformed
         FindDevice FD = new FindDevice();
         FD.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_FindDeviceBtnActionPerformed
 
     private void AddDeviceBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddDeviceBtnActionPerformed

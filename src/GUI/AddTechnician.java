@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import LibraryFunctions.PatternMatching;
 import Objects.Customer;
 import Objects.Technician;
 import LibraryFunctions.respository;
@@ -232,23 +233,32 @@ public class AddTechnician extends javax.swing.JFrame {
                 if(array[i].equals("")){
                     FieldMessage.setText("Fill in all Fields please");
                     FieldMessage.setVisible(true);
+                    SucessfulSave.setVisible(false);
                 }
                 else{
                     counter++;
                 }
             }
-            if(counter==5){
+
+            //checks the password is between 8,16 characters long
+            if(PatternMatching.passwordLengthValdation(Password)&&(counter==5)){
                 //creates it into an object (For customerID 0 is a place holder as the database automatically fills it in)
                 Technician newTechnician = new Technician(0,Name,Username,Password,Email,Admin);
                 respository.AddTechnician(newTechnician);    
                 SucessfulSave.setText("Sucessful Save!");
+                ErrorMessage.setVisible(false);
                 SucessfulSave.setVisible(true);
             }
             else{
-                FieldMessage.setVisible(true);
+                ErrorMessage.setVisible(true);
+                SucessfulSave.setVisible(false);
             }
+
+
         } catch (Exception e) {
             System.out.println("Error in the repository class: " + e);
+            ErrorMessage.setVisible(true);
+            SucessfulSave.setVisible(false);
         }
 
     }//GEN-LAST:event_SaveBtnActionPerformed

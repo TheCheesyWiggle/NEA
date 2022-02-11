@@ -23,6 +23,7 @@ public class EditTickets extends javax.swing.JFrame {
         initComponents();
         TechnicianNameLabel.setText(respository.getCurrentUser().getName());
         ErrorMessage.setVisible(false);
+        SucessfulSave.setVisible(false);
     }
 
     /**
@@ -57,6 +58,8 @@ public class EditTickets extends javax.swing.JFrame {
         PriorityField = new javax.swing.JTextField();
         ErrorMessage = new javax.swing.JLabel();
         SucessfulSave = new javax.swing.JLabel();
+        CloseDateField = new javax.swing.JFormattedTextField();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,7 +87,6 @@ public class EditTickets extends javax.swing.JFrame {
             }
         });
 
-        OpenDateField.setText("Current date");
         OpenDateField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 OpenDateFieldActionPerformed(evt);
@@ -143,6 +145,15 @@ public class EditTickets extends javax.swing.JFrame {
         SucessfulSave.setForeground(new java.awt.Color(0, 153, 0));
         SucessfulSave.setText("SUCESS");
 
+        CloseDateField.setText("Current date");
+        CloseDateField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CloseDateFieldActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("Close date:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -151,43 +162,47 @@ public class EditTickets extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(36, 36, 36)
-                        .addComponent(SaveBtn)
-                        .addGap(18, 18, 18)
-                        .addComponent(AddDeviceBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(FindDeviceBtn)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(MainMenuBtn))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel2)
+                                        .addComponent(jLabel6)
+                                        .addComponent(jLabel8))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(CustomerIDField, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(DeviceIDField)
+                                        .addComponent(CustomerIDField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel4)
+                                        .addComponent(jLabel3)
+                                        .addComponent(jLabel5)
+                                        .addComponent(jLabel10))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(RepairStatus, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(OpenDateField)
+                                        .addComponent(IssueField, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(CloseDateField)))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel9)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(PriorityField, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel8))
+                                .addComponent(SaveBtn)
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(CustomerIDField, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(DeviceIDField, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
-                                    .addComponent(CustomerIDField1, javax.swing.GroupLayout.Alignment.LEADING)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel5))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(RepairStatus, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(OpenDateField)
-                                    .addComponent(IssueField, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(18, 18, 18)
-                                .addComponent(PriorityField, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(AddDeviceBtn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(FindDeviceBtn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(MainMenuBtn))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(163, 163, 163)
-                        .addComponent(jLabel7)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(SucessfulSave, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -197,11 +212,6 @@ public class EditTickets extends javax.swing.JFrame {
                     .addComponent(ErrorMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TechnicianNameLabel))
                 .addGap(166, 166, 166))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(176, 176, 176)
-                    .addComponent(SucessfulSave, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(176, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,9 +222,11 @@ public class EditTickets extends javax.swing.JFrame {
                     .addComponent(TechnicianNameLabel))
                 .addGap(16, 16, 16)
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(SucessfulSave)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ErrorMessage)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CustomerIDField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
@@ -240,21 +252,19 @@ public class EditTickets extends javax.swing.JFrame {
                     .addComponent(PriorityField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(OpenDateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(AddDeviceBtn)
-                            .addComponent(SaveBtn)
-                            .addComponent(MainMenuBtn)
-                            .addComponent(FindDeviceBtn)))
+                    .addComponent(OpenDateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CloseDateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(AddDeviceBtn)
+                    .addComponent(SaveBtn)
+                    .addComponent(MainMenuBtn)
+                    .addComponent(FindDeviceBtn))
                 .addGap(23, 23, 23))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(91, 91, 91)
-                    .addComponent(SucessfulSave)
-                    .addContainerGap(256, Short.MAX_VALUE)))
         );
 
         pack();
@@ -290,10 +300,10 @@ public class EditTickets extends javax.swing.JFrame {
             int Priority = Integer.parseInt(PriorityField.getText());
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             LocalDate startdate = LocalDate.parse(OpenDateField.getText(), formatter);
-            LocalDate closedate = LocalDate.parse("01/01/0001", formatter);
+            LocalDate closedate = LocalDate.parse(CloseDateField.getText(), formatter);
 
             
-            String array[] = {CustomerIDField.getText(), DeviceIDField.getText(), Issue, RepairStat,PriorityField.getText(),OpenDateField.getText()};
+            String array[] = {CustomerIDField.getText(), DeviceIDField.getText(), Issue, RepairStat,PriorityField.getText(),OpenDateField.getText(),CloseDateField.getText()};
             //sets up counter to count filled in fields
             int counter = 0;
             //check if all the fields are filled in
@@ -301,31 +311,36 @@ public class EditTickets extends javax.swing.JFrame {
                 if(array[i].equals("")){
                     ErrorMessage.setText("Fill in all Fields please");
                     ErrorMessage.setVisible(true);
+                    SucessfulSave.setVisible(false);
                 }
                 else{
                     counter++;
                 }
             }
-            if(counter==4){
+            if(counter==7){
                     //creates it into an object (For customerID 0 is a place holder as the database automatically fills it in)
                     Ticket newTicket = new Ticket(0,Issue,RepairStat,Priority,startdate,closedate,DeviceID);
                     respository.editTicket(newTicket);
                     SucessfulSave.setText("Sucessful Save!");
                     SucessfulSave.setVisible(true);
+                    ErrorMessage.setVisible(false);
                 }
             else{
                 ErrorMessage.setVisible(true);
+                SucessfulSave.setVisible(false);
             }            
         }  catch (Exception e) {
                 System.out.println("Error in the repository class: " + e);
                 ErrorMessage.setText("Fill in all Fields please");
                 ErrorMessage.setVisible(true);
+                SucessfulSave.setVisible(false);
         }
     }//GEN-LAST:event_SaveBtnActionPerformed
 
     private void FindDeviceBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FindDeviceBtnActionPerformed
         FindDevice FD = new FindDevice();
         FD.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_FindDeviceBtnActionPerformed
 
     private void IssueFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IssueFieldActionPerformed
@@ -335,6 +350,10 @@ public class EditTickets extends javax.swing.JFrame {
     private void PriorityFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PriorityFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_PriorityFieldActionPerformed
+
+    private void CloseDateFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloseDateFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CloseDateFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -373,6 +392,7 @@ public class EditTickets extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddDeviceBtn;
+    private javax.swing.JFormattedTextField CloseDateField;
     private javax.swing.JTextField CustomerIDField;
     private javax.swing.JTextField CustomerIDField1;
     private javax.swing.JTextField DeviceIDField;
@@ -387,6 +407,7 @@ public class EditTickets extends javax.swing.JFrame {
     private javax.swing.JLabel SucessfulSave;
     private javax.swing.JLabel TechnicianNameLabel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

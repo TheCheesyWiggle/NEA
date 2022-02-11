@@ -21,6 +21,7 @@ public class EditNotes extends javax.swing.JFrame {
         initComponents();
         TechnicianNameLabel.setText(respository.getCurrentUser().getName());
         ErrorMessage.setVisible(false);
+        SucessfulSave.setVisible(false);
     }
 
     /**

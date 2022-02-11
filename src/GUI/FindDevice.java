@@ -69,6 +69,11 @@ public class FindDevice extends javax.swing.JFrame {
         });
 
         EditDeviceBtn.setText("Edit device");
+        EditDeviceBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditDeviceBtnActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel2.setText("Search For Device");
@@ -228,13 +233,21 @@ public class FindDevice extends javax.swing.JFrame {
                         ResultsList.setModel(listModel);
                         break;
                 }
-            ErrorMessage.setVisible(true); 
             }
+            else{
+                 ErrorMessage.setVisible(true);  
+            } 
         } catch (Exception e) {
             System.out.println("Error in the repository class: " + e);
             ErrorMessage.setVisible(true);  
         }
     }//GEN-LAST:event_SearchBtnActionPerformed
+
+    private void EditDeviceBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditDeviceBtnActionPerformed
+        EditDevice EditDevice = new EditDevice();
+        EditDevice.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_EditDeviceBtnActionPerformed
 
     /**
      * @param args the command line arguments

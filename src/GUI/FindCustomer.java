@@ -236,6 +236,10 @@ public class FindCustomer extends javax.swing.JFrame {
                         break;
                 }
             }
+            else{
+                ErrorMessage.setVisible(true);  
+            }
+           
         } catch (Exception e) {
             System.out.println("Error in the repository class: " + e);
             ErrorMessage.setVisible(true);  
